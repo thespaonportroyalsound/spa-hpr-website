@@ -115,6 +115,16 @@ a:hover, a:focus { color: var(--green-mid); text-decoration: underline; }
 .masthead h1 { color: var(--white); margin: 0 0 .35rem; }
 .masthead-tagline { font-size: clamp(1rem, 2vw, 1.2rem); margin: 0 auto; max-width: 40rem; color: var(--cream); }
 
+/* Site logo shown in masthead / page header */
+.site-logo {
+  display: block;
+  width: clamp(80px, 18vw, 130px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto .75rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+}
+
 /* Page header (interior pages) */
 .page-header {
   background: var(--green-deep);

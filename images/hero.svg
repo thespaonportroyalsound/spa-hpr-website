@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500" role="img" aria-label="Coastal view of The Spa on Port Royal Sound">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#AED6F1"/>
+      <stop offset="1" stop-color="#2E86C1"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E86C1"/>
+      <stop offset="1" stop-color="#1B4F72"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="330" fill="url(#sky)"/>
+  <circle cx="1300" cy="110" r="62" fill="#F5E6CC" opacity="0.92"/>
+  <rect y="320" width="1600" height="120" fill="url(#water)"/>
+  <path d="M0 430 Q400 410 800 430 T1600 430 V500 H0 Z" fill="#1B4F72" opacity="0.55"/>
+  <rect y="445" width="1600" height="55" fill="#F5E6CC"/>
+</svg>

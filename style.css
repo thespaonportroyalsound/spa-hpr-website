@@ -1,0 +1,157 @@
+/* The Spa on Port Royal Sound, HPR — styles */
+
+:root {
+  --navy: #1B4F72;
+  --teal: #2E86C1;
+  --sand: #F5E6CC;
+  --sand-deep: #EAD9B0;
+  --ink: #2c3e50;
+  --ink-soft: #4a5a6a;
+  --white: #ffffff;
+  --warn-bg: #FDEDEC;
+  --warn-border: #B03A2E;
+  --warn-ink: #641E16;
+  --maxw: 1100px;
+  --nav-h: 3.75rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: var(--nav-h); -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+}
+
+h1, h2, h3 { color: var(--navy); line-height: 1.25; margin: 0 0 .5em; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 900; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 900; padding-bottom: .25rem; border-bottom: 3px solid var(--teal); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; margin-top: 1.5rem; }
+
+p { margin: 0 0 1rem; }
+a { color: var(--teal); }
+a:hover { color: var(--navy); }
+
+.container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 1.25rem; }
+
+/* Hero */
+.hero {
+  position: relative;
+  color: var(--white);
+  text-align: center;
+  background:
+    linear-gradient(rgba(27,79,114,.72), rgba(27,79,114,.86)),
+    url("images/hero.svg") center/cover no-repeat;
+  background-color: var(--navy);
+}
+.hero-inner { max-width: var(--maxw); margin: 0 auto; padding: 3.5rem 1.25rem 3rem; }
+.hero-eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .85rem; font-weight: 700; margin: 0 0 .5rem; color: var(--sand); }
+.hero h1 { color: var(--white); margin: 0 0 .5rem; }
+.hero-tagline { font-size: clamp(1.05rem, 2.2vw, 1.3rem); margin: 0 auto 1rem; max-width: 40rem; }
+.hero-address { font-size: 1.1rem; font-style: normal; color: var(--sand); margin: 0; }
+
+/* Sticky nav */
+.main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  border-bottom: 3px solid var(--teal);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  gap: .25rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 0 .5rem;
+}
+.nav-inner a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: .95rem .85rem;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+}
+.nav-inner a:hover,
+.nav-inner a:focus { background: var(--teal); border-bottom-color: var(--sand); outline: none; }
+
+/* Sections */
+.section { padding: 2.5rem 0; }
+.section-alt { background: var(--sand); }
+.section + .section-alt {  }
+
+.lede { font-size: 1.2rem; color: var(--ink-soft); }
+
+ul, ol { margin: 0 0 1.25rem; padding-left: 1.25rem; }
+li { margin: 0 0 .6rem; }
+
+/* Contacts */
+.contacts { margin-top: 2rem; background: var(--white); border: 1px solid var(--sand-deep); border-radius: .5rem; padding: 1rem 1.25rem; }
+.section-alt .contacts { background: #fffdf6; }
+.contact-list { list-style: none; padding: 0; margin: 0; }
+.contact-list li { margin-bottom: .4rem; }
+
+/* Alert box */
+.alert {
+  background: var(--warn-bg);
+  border-left: 6px solid var(--warn-border);
+  border-radius: .4rem;
+  padding: 1rem 1.25rem;
+  margin: 0 0 1.5rem;
+  color: var(--warn-ink);
+  font-size: 1.1rem;
+}
+.alert p { margin: 0; }
+
+/* Key fact */
+.keyfact { font-size: 1.25rem; font-weight: 700; color: var(--navy); background: var(--sand); display: inline-block; padding: .35rem .85rem; border-radius: .35rem; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 1.05rem; min-width: 32rem; }
+thead th { background: var(--navy); color: var(--white); text-align: left; padding: .75rem 1rem; }
+tbody td { padding: .75rem 1rem; border-bottom: 1px solid var(--sand-deep); }
+tbody tr:nth-child(even) { background: var(--sand); }
+
+/* Amenity photos */
+.amenity-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin: 1.5rem 0 0; }
+.amenity-photos figure { margin: 0; }
+.amenity-photos img { width: 100%; height: auto; border-radius: .5rem; display: block; }
+.amenity-photos figcaption { text-align: center; font-size: .95rem; color: var(--ink-soft); margin-top: .4rem; }
+
+/* Document links */
+.doc-links { list-style: none; padding: 0; }
+.doc-links li { margin-bottom: .6rem; }
+.doc-links a { font-weight: 700; font-size: 1.1rem; }
+
+/* Footer */
+.footer { background: var(--navy); color: var(--white); padding: 2rem 0; }
+.footer a { color: var(--sand); }
+.footer-name { font-weight: 900; font-size: 1.2rem; margin: 0 0 .35rem; }
+.footer address { font-style: normal; margin: 0 0 .5rem; }
+.footer-contacts { margin: 0 0 .75rem; }
+.footer-fineprint { font-size: .9rem; opacity: .85; margin: 0; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  body { font-size: 1.0625rem; }
+  .hero-inner { padding: 2.5rem 1.25rem 2.25rem; }
+  .section { padding: 2rem 0; }
+  .amenity-photos { grid-template-columns: 1fr; }
+  .nav-inner { justify-content: flex-start; }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible { outline: 3px solid var(--sand); outline-offset: 2px; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }

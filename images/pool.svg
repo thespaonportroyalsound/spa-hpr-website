@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Outdoor pool">
+  <rect width="800" height="500" fill="#F5E6CC"/>
+  <rect x="80" y="120" width="640" height="280" rx="120" fill="#2E86C1"/>
+  <rect x="80" y="120" width="640" height="280" rx="120" fill="url(#ripple)" opacity="0.35"/>
+  <defs>
+    <linearGradient id="ripple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#AED6F1"/>
+      <stop offset="1" stop-color="#1B4F72"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="120" width="640" height="40" rx="20" fill="#1B4F72" opacity="0.25"/>
+  <g stroke="#1B4F72" stroke-width="6" fill="none">
+    <path d="M140 150 V250 M140 250 H180 M140 200 H180"/>
+  </g>
+</svg>

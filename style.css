@@ -71,6 +71,7 @@ a:hover, a:focus { color: var(--green-mid); text-decoration: underline; }
   white-space: nowrap;
 }
 .brand:hover { color: var(--white); text-decoration: none; }
+.brand-short { display: none; }
 .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
 .nav-links a {
   color: var(--cream);
@@ -482,10 +483,17 @@ tbody tr:nth-child(even) { background: var(--cream); }
 
 /* Responsive */
 @media (max-width: 640px) {
+  html { scroll-padding-top: 6rem; }
   body { font-size: 1.0625rem; }
-  .topbar-inner { justify-content: flex-start; }
-  .nav-links { width: 100%; overflow-x: auto; scrollbar-width: thin; }
-  .nav-links a { padding: .55rem .65rem; }
+  .topbar-inner { justify-content: center; text-align: center; gap: .5rem; }
+  .brand { width: 100%; text-align: center; font-size: 1.05rem; }
+  .brand-full { display: none; }
+  .brand-short { display: inline; }
+  .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; overflow-x: visible; }
+  .nav-links a { padding: .55rem .7rem; }
+  .section-nav { position: static; }
+  .section-nav .nav-inner { flex-wrap: wrap; justify-content: center; overflow-x: visible; padding: .5rem; }
+  .section-nav a { flex: 1 1 auto; text-align: center; min-width: 7.5rem; }
   .masthead-inner { padding: 1.25rem 1.25rem 1.1rem; }
   .section { padding: 1.75rem 0; }
   .amenity-photos { grid-template-columns: 1fr; }

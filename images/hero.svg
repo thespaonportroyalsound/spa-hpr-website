@@ -1,17 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500" role="img" aria-label="Coastal view of The Spa on Port Royal Sound">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500" role="img" aria-label="Marshland view of The Spa on Port Royal Sound">
   <defs>
     <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#AED6F1"/>
-      <stop offset="1" stop-color="#2E86C1"/>
+      <stop offset="0" stop-color="#D9D2B0"/>
+      <stop offset="1" stop-color="#7E9C6A"/>
     </linearGradient>
     <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2E86C1"/>
-      <stop offset="1" stop-color="#1B4F72"/>
+      <stop offset="0" stop-color="#2E5C3E"/>
+      <stop offset="1" stop-color="#1B3A28"/>
     </linearGradient>
   </defs>
   <rect width="1600" height="330" fill="url(#sky)"/>
-  <circle cx="1300" cy="110" r="62" fill="#F5E6CC" opacity="0.92"/>
+  <circle cx="1300" cy="110" r="62" fill="#F1E9D2" opacity="0.92"/>
   <rect y="320" width="1600" height="120" fill="url(#water)"/>
-  <path d="M0 430 Q400 410 800 430 T1600 430 V500 H0 Z" fill="#1B4F72" opacity="0.55"/>
-  <rect y="445" width="1600" height="55" fill="#F5E6CC"/>
+  <path d="M0 430 Q400 410 800 430 T1600 430 V500 H0 Z" fill="#1B3A28" opacity="0.65"/>
+  <rect y="445" width="1600" height="55" fill="#244C34"/>
+  <g fill="#1B3A28" opacity="0.8">
+    <path d="M180 445 q-5 -42 9 -54 q7 16 3 32 q11 -24 24 -28 q-2 26 -16 50 z"/>
+    <path d="M1320 445 q-4 -38 7 -48 q6 12 2 26 q9 -20 20 -23 q-2 22 -12 45 z"/>
+  </g>
 </svg>

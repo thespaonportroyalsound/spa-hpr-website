@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" style="background-color: #f8fafc; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; border: 2px solid #e2e8f0; border-radius: 8px;">
+    <style>
+        .building { 
+            fill: #cbd5e1; 
+            stroke: #475569; 
+            stroke-width: 2; 
+            transition: fill 0.2s ease, stroke 0.2s ease; 
+            cursor: pointer;
+        }
+        .building:hover { 
+            fill: #94a3b8;
+            stroke: #1e293b;
+        }
+        .label { 
+            fill: #0f172a; 
+            font-size: 22px; 
+            font-weight: 700; 
+            text-anchor: middle; 
+            dominant-baseline: central; 
+            pointer-events: none; 
+        }
+        .context-area { 
+            fill: #f1f5f9; 
+            stroke: #94a3b8; 
+            stroke-width: 2; 
+            stroke-dasharray: 6 4; 
+            rx: 4;
+        }
+        .amenity-label {
+            fill: #0f172a;
+            font-size: 14px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+        .amenity-label-sm {
+            fill: #0f172a;
+            font-size: 12px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+        .tennis-courts {
+            fill: #86EFAC;
+            fill-opacity: 0.25;
+            stroke: #000000;
+            stroke-width: 2;
+            rx: 4;
+        }
+        .pool {
+            fill: #60A5FA;
+            fill-opacity: 0.35;
+            stroke: #000000;
+            stroke-width: 2;
+        }
+        .beach {
+            fill: #FDE68A;
+            fill-opacity: 0.7;
+            stroke: #D4B85E;
+            stroke-width: 1;
+        }
+        .ocean {
+            fill: #93C5FD;
+            fill-opacity: 0.45;
+        }
+        .pier {
+            fill: #8B5A2B;
+            stroke: #6B421B;
+            stroke-width: 1;
+        }
+    </style>
+
+    <!-- Ocean on the east (right) side -->
+    <path d="M 1160 0 
+             C 1180 60, 1140 100, 1170 160 
+             C 1200 220, 1150 260, 1180 320 
+             C 1200 380, 1160 420, 1190 480 
+             C 1205 500, 1180 500, 1160 500 
+             L 1400 500 L 1400 0 Z" 
+          class="ocean" />
+
+    <!-- Beach: short wavy shape -->
+    <path d="M 1100 245 
+             Q 1130 235, 1160 245 
+             Q 1190 255, 1200 245 
+             L 1200 265 
+             Q 1190 255, 1160 265 
+             Q 1130 275, 1100 265 Z" 
+          class="beach" />
+    <text x="1150" y="258" class="amenity-label-sm">Beach</text>
+
+    <!-- Pier with rounded look-out deck -->
+    <path d="M 1160 246 L 1260 246 L 1260 234 Q 1282 234, 1282 250 Q 1282 266, 1260 266 L 1260 254 L 1160 254 Z" class="pier" />
+
+    <!-- Tennis courts between A, B, C and D -->
+    <rect x="155" y="140" width="210" height="220" class="tennis-courts" />
+    <text x="260" y="255" class="amenity-label">Tennis Courts</text>
+
+    <!-- HOA office / Indoor Pool & Fitness Center -->
+    <rect x="460" y="160" width="120" height="180" class="context-area" />
+    <text x="520" y="188" class="amenity-label">Indoor Pool &amp;</text>
+    <text x="520" y="212" class="amenity-label">Fitness Center</text>
+    <text x="520" y="318" class="amenity-label">HOA Office</text>
+
+    <!-- Family Pool between E and F -->
+    <circle cx="740" cy="250" r="45" class="pool" />
+    <text x="740" y="255" class="amenity-label">Family Pool</text>
+
+    <!-- Beach Pool near the beach ends of H and I -->
+    <circle cx="1080" cy="250" r="36" class="pool" />
+    <text x="1080" y="255" class="amenity-label-sm">Beach Pool</text>
+
+    <!-- Buildings -->
+    <g id="bldg-a">
+        <rect x="180" y="60" width="200" height="40" class="building" rx="4" />
+        <text x="280" y="80" class="label">A</text>
+    </g>
+
+    <g id="bldg-b">
+        <rect x="400" y="140" width="40" height="220" class="building" rx="4" />
+        <text x="420" y="250" class="label">B</text>
+    </g>
+
+    <g id="bldg-c">
+        <rect x="180" y="400" width="200" height="40" class="building" rx="4" />
+        <text x="280" y="420" class="label">C</text>
+    </g>
+
+    <g id="bldg-d">
+        <rect x="80" y="180" width="40" height="140" class="building" rx="4" />
+        <text x="100" y="250" class="label">D</text>
+    </g>
+
+    <g id="bldg-e">
+        <rect x="660" y="110" width="160" height="40" class="building" rx="4" />
+        <text x="740" y="130" class="label">E</text>
+    </g>
+
+    <g id="bldg-f">
+        <rect x="660" y="350" width="160" height="40" class="building" rx="4" />
+        <text x="740" y="370" class="label">F</text>
+    </g>
+
+    <g id="bldg-g">
+        <rect x="600" y="180" width="40" height="140" class="building" rx="4" />
+        <text x="620" y="250" class="label">G</text>
+    </g>
+
+    <g id="bldg-h">
+        <path d="M 850 130 L 970 80 L 1120 80 L 1120 120 L 980 120 L 870 170 Z" class="building" stroke-linejoin="round" />
+        <text x="1040" y="100" class="label">H</text>
+    </g>
+
+    <g id="bldg-i">
+        <path d="M 850 370 L 970 420 L 1120 420 L 1120 380 L 980 380 L 870 330 Z" class="building" stroke-linejoin="round" />
+        <text x="1040" y="400" class="label">I</text>
+    </g>
+</svg>

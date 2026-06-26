@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit &amp; Building Finder — The Spa on Port Royal Sound, HPR</title>
+  <meta name="description" content="Interactive unit and building finder for The Spa on Port Royal Sound, HPR on Hilton Head Island, SC. Enter a unit number to see which building it is in and where it sits within that building.">
+  <meta name="author" content="The Spa on Port Royal Sound, HPR">
+  <meta name="theme-color" content="#1B3A28">
+  <meta property="og:title" content="Unit &amp; Building Finder — The Spa on Port Royal Sound, HPR">
+  <meta property="og:description" content="Find any unit at The Spa on Port Royal Sound, HPR. Enter a unit number to see which of the nine buildings it's in and its location within the building.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231B3A28'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%23F1E9D2' font-family='serif'>S</text></svg>">
+</head>
+<body>
+
+  <nav class="topbar" id="topnav" aria-label="Primary navigation">
+    <div class="topbar-inner container">
+      <a class="brand" href="index.html">The Spa on Port Royal Sound, HPR</a>
+      <div class="nav-links" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="rules.html">Rules</a>
+        <a href="unit-finder.html" aria-current="page">Unit Finder</a>
+        <a href="documents.html">Documents &amp; Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header" role="banner">
+    <div class="container">
+      <h1>Unit &amp; Building Finder</h1>
+      <p class="page-header-tagline">Enter a unit number to find which of the nine buildings it is in and where it sits within that building.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+
+        <p class="lede">A quick way for residents, guests, and delivery drivers to locate a specific unit at The Spa. The community has 268 condos and villas spread across nine three-story buildings (A through I) arranged in three rows between the parking lot and the Port Royal Sound.</p>
+        <p class="lede lede-short">Enter a unit number to locate the building and floor.</p>
+
+        <div class="finder-search" role="search">
+          <label for="unit-input">Unit Number</label>
+          <input id="unit-input" type="text" inputmode="numeric" placeholder="e.g. 3116" maxlength="6" autocomplete="off" aria-label="Unit number">
+          <button type="button" onclick="findUnit()">Find Unit</button>
+          <div id="result-badge" class="result-badge hidden" aria-live="polite"></div>
+        </div>
+
+        <div class="finder-panels">
+
+          <section class="finder-map" aria-label="Overhead property map">
+            <h2 class="finder-section-title">Property Overview</h2>
+            <div id="overview-svg-wrap" aria-label="Overhead map of The Spa property showing the nine buildings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 500" style="background-color: #f8fafc; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; border: 2px solid #e2e8f0; border-radius: 8px;">
+                <style>
+                  .building { fill: #cbd5e1; stroke: #475569; stroke-width: 2; transition: fill 0.2s ease, stroke 0.2s ease; cursor: pointer; }
+                  .building:hover { fill: #94a3b8; stroke: #1e293b; }
+                  .label { fill: #0f172a; font-size: 22px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+                  .context-area { fill: #f1f5f9; stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 6 4; rx: 4; }
+                  .amenity-label { fill: #0f172a; font-size: 14px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+                  .amenity-label-sm { fill: #0f172a; font-size: 12px; font-weight: 600; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+                  .tennis-courts { fill: #86EFAC; fill-opacity: 0.25; stroke: #000000; stroke-width: 2; rx: 4; }
+                  .pool { fill: #60A5FA; fill-opacity: 0.35; stroke: #000000; stroke-width: 2; }
+                  .beach { fill: #FDE68A; fill-opacity: 0.7; stroke: #D4B85E; stroke-width: 1; }
+                  .ocean { fill: #93C5FD; fill-opacity: 0.45; }
+                  .pier { fill: #8B5A2B; stroke: #6B421B; stroke-width: 1; }
+                </style>
+
+                <!-- Ocean on the east (right) side -->
+                <path d="M 1160 0 
+                         C 1180 60, 1140 100, 1170 160 
+                         C 1200 220, 1150 260, 1180 320 
+                         C 1200 380, 1160 420, 1190 480 
+                         C 1205 500, 1180 500, 1160 500 
+                         L 1400 500 L 1400 0 Z" 
+                      class="ocean" />
+
+                <!-- Beach: short wavy shape -->
+                <path d="M 1100 245 
+                         Q 1130 235, 1160 245 
+                         Q 1190 255, 1200 245 
+                         L 1200 265 
+                         Q 1190 255, 1160 265 
+                         Q 1130 275, 1100 265 Z" 
+                      class="beach" />
+                <text x="1150" y="258" class="amenity-label-sm">Beach</text>
+
+                <!-- Pier with rounded look-out deck -->
+                <path d="M 1160 246 L 1260 246 L 1260 234 Q 1282 234, 1282 250 Q 1282 266, 1260 266 L 1260 254 L 1160 254 Z" class="pier" />
+
+                <!-- Tennis courts between A, B, C and D -->
+                <rect x="155" y="140" width="210" height="220" class="tennis-courts" />
+                <text x="260" y="255" class="amenity-label">Tennis Courts</text>
+
+                <!-- HOA office / Indoor Pool & Fitness Center -->
+                <rect x="460" y="160" width="120" height="180" class="context-area" />
+                <text x="520" y="188" class="amenity-label">Indoor Pool &amp;</text>
+                <text x="520" y="212" class="amenity-label">Fitness Center</text>
+                <text x="520" y="318" class="amenity-label">HOA Office</text>
+
+                <!-- Family Pool between E and F -->
+                <circle cx="740" cy="250" r="45" class="pool" />
+                <text x="740" y="255" class="amenity-label">Family Pool</text>
+
+                <!-- Beach Pool near the beach ends of H and I -->
+                <circle cx="1080" cy="250" r="36" class="pool" />
+                <text x="1080" y="255" class="amenity-label-sm">Beach Pool</text>
+
+                <!-- Buildings -->
+                <g id="bldg-a">
+                  <rect x="180" y="60" width="200" height="40" class="building" rx="4" />
+                  <text x="280" y="80" class="label">A</text>
+                </g>
+                <g id="bldg-b">
+                  <rect x="400" y="140" width="40" height="220" class="building" rx="4" />
+                  <text x="420" y="250" class="label">B</text>
+                </g>
+                <g id="bldg-c">
+                  <rect x="180" y="400" width="200" height="40" class="building" rx="4" />
+                  <text x="280" y="420" class="label">C</text>
+                </g>
+                <g id="bldg-d">
+                  <rect x="80" y="180" width="40" height="140" class="building" rx="4" />
+                  <text x="100" y="250" class="label">D</text>
+                </g>
+                <g id="bldg-e">
+                  <rect x="660" y="110" width="160" height="40" class="building" rx="4" />
+                  <text x="740" y="130" class="label">E</text>
+                </g>
+                <g id="bldg-f">
+                  <rect x="660" y="350" width="160" height="40" class="building" rx="4" />
+                  <text x="740" y="370" class="label">F</text>
+                </g>
+                <g id="bldg-g">
+                  <rect x="600" y="180" width="40" height="140" class="building" rx="4" />
+                  <text x="620" y="250" class="label">G</text>
+                </g>
+                <g id="bldg-h">
+                  <path d="M 850 130 L 970 80 L 1120 80 L 1120 120 L 980 120 L 870 170 Z" class="building" stroke-linejoin="round" />
+                  <text x="1040" y="100" class="label">H</text>
+                </g>
+                <g id="bldg-i">
+                  <path d="M 850 370 L 970 420 L 1120 420 L 1120 380 L 980 380 L 870 330 Z" class="building" stroke-linejoin="round" />
+                  <text x="1040" y="400" class="label">I</text>
+                </g>
+              </svg>
+            </div>
+            <p class="mobile-hint map-hint">Swipe left/right to pan the property map.</p>
+          </section>
+
+          <section class="finder-map" aria-label="Building detail and unit location">
+            <h2 class="finder-section-title">Building Detail &mdash; Unit Location</h2>
+            <div id="detail-wrap">
+              <div class="detail-placeholder">
+                Enter a unit number above to see its location within the building.
+              </div>
+            </div>
+            <p class="mobile-hint detail-hint">Swipe left/right on a floor row to see all units.</p>
+          </section>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <p class="footer-name">The Spa on Port Royal Sound, HPR</p>
+      <address>239 Beach City Road, Hilton Head Island, SC 29926</address>
+      <p class="footer-contacts">
+        General Manager: <a href="mailto:mark@imchhi.com">mark@imchhi.com</a> &nbsp;&bull;&nbsp;
+        On-Site Manager: <a href="mailto:alex@imchhi.com">alex@imchhi.com</a>
+      </p>
+      <p class="footer-fineprint">This site provides public community information for residents, guests, and renters. For official records, see the <a href="documents.html">Governing Documents</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+  // Unit data and prototype finder logic.
+  // The data below is a starting point. Building/unit layouts, stairwell positions,
+  // and the property overview map can be refined as needed.
+
+  const unitBuilding = {};
+  const rawData = [
+    ["3110","A"],["3112","A"],["3114","A"],["3116","A"],["3118","A"],["3120","A"],["3122","A"],["3124","A"],["3126","A"],["3128","A"],["3130","A"],["3132","A"],
+    ["3210","A"],["3212","A"],["3214","A"],["3216","A"],["3218","A"],["3220","A"],["3222","A"],["3224","A"],["3226","A"],["3228","A"],["3230","A"],["3232","A"],
+    ["3310","A"],["3312","A"],["3314","A"],["3316","A"],["3318","A"],["3320","A"],["3322","A"],["3324","A"],["3326","A"],["3328","A"],["3330","A"],["3332","A"],
+    ["3101","B"],["3102","B"],["3103","B"],["3104","B"],["3105","B"],["3106","B"],["3107","B"],["3108","B"],
+    ["3201","B"],["3202","B"],["3203","B"],["3204","B"],["3205","B"],["3206","B"],["3207","B"],["3208","B"],
+    ["3301","B"],["3302","B"],["3303","B"],["3304","B"],["3305","B"],["3306","B"],["3307","B"],["3308","B"],
+    ["3109","C"],["3111","C"],["3113","C"],["3115","C"],["3117","C"],["3119","C"],["3121","C"],["3123","C"],["3125","C"],["3127","C"],["3129","C"],["3131","C"],
+    ["3209","C"],["3211","C"],["3213","C"],["3215","C"],["3217","C"],["3219","C"],["3221","C"],["3223","C"],["3225","C"],["3227","C"],["3229","C"],["3231","C"],
+    ["3309","C"],["3311","C"],["3313","C"],["3315","C"],["3317","C"],["3319","C"],["3321","C"],["3323","C"],["3325","C"],["3327","C"],["3329","C"],["3331","C"],
+    ["3133","D"],["3134","D"],["3135","D"],["3136","D"],["3137","D"],["3138","D"],
+    ["3233","D"],["3234","D"],["3235","D"],["3236","D"],["3237","D"],["3238","D"],
+    ["3333","D"],["3334","D"],["3335","D"],["3336","D"],["3337","D"],["3338","D"],
+    ["2102","E"],["2104","E"],["2106","E"],["2108","E"],["2110","E"],["2112","E"],["2114","E"],["2116","E"],["2118","E"],
+    ["2202","E"],["2204","E"],["2206","E"],["2208","E"],["2210","E"],["2212","E"],["2214","E"],["2216","E"],["2218","E"],
+    ["2302","E"],["2304","E"],["2306","E"],["2308","E"],["2310","E"],["2312","E"],["2314","E"],["2316","E"],["2318","E"],
+    ["2101","F"],["2103","F"],["2105","F"],["2107","F"],["2109","F"],["2111","F"],["2113","F"],["2115","F"],["2117","F"],
+    ["2201","F"],["2203","F"],["2205","F"],["2207","F"],["2209","F"],["2211","F"],["2213","F"],["2215","F"],["2217","F"],
+    ["2301","F"],["2303","F"],["2305","F"],["2307","F"],["2309","F"],["2311","F"],["2313","F"],["2315","F"],["2317","F"],
+    ["2119","G"],["2120","G"],["2219","G"],["2220","G"],["2221","G"],["2222","G"],["2319","G"],["2320","G"],["2321","G"],["2322","G"],
+    ["1102","H"],["1104","H"],["1106","H"],["1108","H"],["1110","H"],["1112","H"],["1114","H"],["1116","H"],["1118","H"],["1120","H"],["1122","H"],["1124","H"],["1126","H"],["1128","H"],["1130","H"],
+    ["1202","H"],["1204","H"],["1206","H"],["1208","H"],["1210","H"],["1212","H"],["1214","H"],["1216","H"],["1218","H"],["1220","H"],["1222","H"],["1224","H"],["1226","H"],["1228","H"],["1230","H"],
+    ["1302","H"],["1304","H"],["1306","H"],["1308","H"],["1310","H"],["1312","H"],["1314","H"],["1316","H"],["1318","H"],["1320","H"],["1322","H"],["1324","H"],["1326","H"],["1328","H"],["1330","H"],
+    ["1101","I"],["1103","I"],["1105","I"],["1107","I"],["1109","I"],["1111","I"],["1113","I"],["1115","I"],["1117","I"],["1119","I"],["1121","I"],["1123","I"],["1125","I"],["1127","I"],["1129","I"],
+    ["1201","I"],["1203","I"],["1205","I"],["1207","I"],["1209","I"],["1211","I"],["1213","I"],["1215","I"],["1217","I"],["1219","I"],["1221","I"],["1223","I"],["1225","I"],["1227","I"],["1229","I"],
+    ["1301","I"],["1303","I"],["1305","I"],["1307","I"],["1309","I"],["1311","I"],["1313","I"],["1315","I"],["1317","I"],["1319","I"],["1321","I"],["1323","I"],["1325","I"],["1327","I"],["1329","I"]
+  ];
+  rawData.forEach(([u, b]) => { unitBuilding[u] = b; });
+
+  const buildingLayouts = {
+    A: ["3110","3112","3114","3116","3118","3120","3122","3124","3126","3128","3130","3132"],
+    B: ["3107","3105","3103","3101","3102","3104","3106","3108"],
+    C: ["3131","3129","3127","3125","3123","3121","3119","3117","3115","3113","3111","3109"],
+    D: ["3134","3136","3138","3137","3135","3133"],
+    E: ["2102","2104","2106","2108","2110","2112","2114","2116","2118"],
+    F: ["2117","2115","2113","2111","2109","2107","2105","2103","2101"],
+    G: ["2120","2222","2221","2119"],
+    H: ["1102","1104","1106","1108","1110","1112","1114","1116","1118","1120","1122","1124","1126","1128","1130"],
+    I: ["1129","1127","1125","1123","1121","1119","1117","1115","1113","1111","1109","1107","1105","1103","1101"]
+  };
+
+  const beachFloor1 = {
+    H: new Set(["1102","1104","1106"]),
+    I: new Set(["1101","1103","1105"])
+  };
+
+  const buildingFloors = { A:3, B:3, C:3, D:3, E:3, F:3, G:3, H:3, I:3 };
+
+  function floorVersion(unit1, floor) {
+    return unit1[0] + String(floor) + unit1.slice(2);
+  }
+
+  function isBeachEnd(unit, building) {
+    const bf = beachFloor1[building];
+    if (!bf) return false;
+    const f1 = unit[0] + "1" + unit.slice(2);
+    return bf.has(f1);
+  }
+
+  // Property overview map: toggle a .highlighted class on the matching
+  // <g id="bldg-X"> building to mark it. The SVG is inlined in the HTML.
+  let overviewSVG = null;
+
+  function init() {
+    const wrap = document.getElementById('overview-svg-wrap');
+    overviewSVG = wrap.querySelector('svg');
+    if (overviewSVG) attachBuildingClicks();
+    setHighlightedBuilding(null);
+  }
+
+  function attachBuildingClicks() {
+    ['a','b','c','d','e','f','g','h','i'].forEach(letter => {
+      const g = overviewSVG.querySelector(`#bldg-${letter}`);
+      if (!g) return;
+      g.style.cursor = 'pointer';
+      g.addEventListener('click', () => {
+        document.getElementById('unit-input').value = '';
+        clearResults();
+        highlightBuildingOnly(letter.toUpperCase());
+      });
+    });
+  }
+
+  function setHighlightedBuilding(letter) {
+    if (!overviewSVG) return;
+    overviewSVG.querySelectorAll('.building.highlighted').forEach(el => el.classList.remove('highlighted'));
+    if (!letter) return;
+    const g = overviewSVG.querySelector(`#bldg-${letter.toLowerCase()}`);
+    if (!g) return;
+    const building = g.querySelector('.building');
+    if (building) building.classList.add('highlighted');
+  }
+
+  function buildDetailView(building, highlightUnit) {
+    const wrap = document.getElementById('detail-wrap');
+    wrap.innerHTML = '';
+
+    const layout1 = buildingLayouts[building];
+    const floors = buildingFloors[building] || 3;
+
+    const div = document.createElement('div');
+    div.className = 'bldg-detail';
+
+    const lbl = document.createElement('div');
+    lbl.className = 'bldg-label';
+    lbl.textContent = `Building ${building}`;
+    div.appendChild(lbl);
+
+    const sub = document.createElement('div');
+    sub.className = 'bldg-sublabel';
+    sub.textContent = highlightUnit
+      ? `Unit ${highlightUnit} highlighted`
+      : `${floors}-story building · ${layout1.length} units per floor`;
+    div.appendChild(sub);
+
+    const grid = document.createElement('div');
+    grid.className = 'building-grid';
+
+    for (let f = floors; f >= 1; f--) {
+      const row = document.createElement('div');
+      row.className = 'floor-row';
+
+      const floorLbl = document.createElement('div');
+      floorLbl.className = 'floor-label';
+      floorLbl.textContent = f;
+      row.appendChild(floorLbl);
+
+      const stL = document.createElement('div');
+      stL.className = 'stair-cell';
+      stL.textContent = 'STR';
+      stL.setAttribute('aria-label', 'Stairwell');
+      row.appendChild(stL);
+
+      layout1.forEach(unit1 => {
+        const unitNum = floorVersion(unit1, f);
+        const cell = document.createElement('div');
+        cell.className = 'unit-cell';
+
+        if (isBeachEnd(unitNum, building)) {
+          cell.classList.add('beach-stack');
+          cell.title = `${unitNum} — beach-side entry`;
+        }
+
+        if (unitNum === highlightUnit) {
+          cell.classList.add('highlighted');
+        }
+
+        cell.textContent = unitNum;
+        if (layout1.length > 12) {
+          cell.style.fontSize = '.62rem';
+        } else if (layout1.length > 9) {
+          cell.style.fontSize = '.68rem';
+        }
+
+        row.appendChild(cell);
+      });
+
+      const stR = document.createElement('div');
+      stR.className = 'stair-cell';
+      stR.textContent = 'STR';
+      stR.setAttribute('aria-label', 'Stairwell');
+      row.appendChild(stR);
+
+      grid.appendChild(row);
+    }
+
+    div.appendChild(grid);
+
+    const compass = document.createElement('div');
+    compass.className = 'compass-note';
+    compass.textContent = '← Left end                    Right end →   (as seen from the parking lot)';
+    div.appendChild(compass);
+
+    const legend = document.createElement('div');
+    legend.className = 'legend';
+    legend.innerHTML = `
+      <div class="legend-item"><div class="legend-swatch" style="background:#E8B339;border-color:#B8860B"></div> Your unit</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#F1E9D2"></div> Standard unit</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#A88A5C;border-color:#A88A5C"></div> Stairwell</div>
+      ${(building==='H'||building==='I') ? '<div class="legend-item"><div class="legend-swatch" style="background:#D4E2DA;border-color:#7E9C6A"></div> Beach-side entry</div>' : ''}
+    `;
+    div.appendChild(legend);
+
+    wrap.appendChild(div);
+  }
+
+  function clearResults() {
+    const badge = document.getElementById('result-badge');
+    badge.className = 'result-badge hidden';
+    badge.textContent = '';
+    document.getElementById('detail-wrap').innerHTML = `
+      <div class="detail-placeholder">
+        Enter a unit number above to see its location within the building.
+      </div>`;
+    setHighlightedBuilding(null);
+  }
+
+  function highlightBuildingOnly(bld) {
+    setHighlightedBuilding(bld);
+    buildDetailView(bld, null);
+    const badge = document.getElementById('result-badge');
+    badge.className = 'result-badge';
+    badge.textContent = `Building ${bld} selected`;
+  }
+
+  function findUnit() {
+    const raw = document.getElementById('unit-input').value.trim();
+    const badge = document.getElementById('result-badge');
+
+    if (!raw) {
+      clearResults();
+      return;
+    }
+
+    const building = unitBuilding[raw];
+    if (!building) {
+      badge.className = 'result-badge error';
+      badge.textContent = `Unit "${raw}" not found`;
+      setHighlightedBuilding(null);
+      document.getElementById('detail-wrap').innerHTML = `
+        <div class="detail-placeholder">
+          No unit found matching that number. Please check and try again.
+        </div>`;
+      return;
+    }
+
+    badge.className = 'result-badge';
+    badge.textContent = `Unit ${raw} → Building ${building}`;
+    setHighlightedBuilding(building);
+    buildDetailView(building, raw);
+  }
+
+  document.getElementById('unit-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') findUnit();
+  });
+
+  init();
+  </script>
+
+</body>
+</html>

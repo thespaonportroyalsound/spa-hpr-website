@@ -280,12 +280,84 @@
     if (building) building.classList.add('highlighted');
   }
 
+  // Buildings H and I have an additional central stairwell in addition to the
+  // end stairwells that every building has. The value is the number of units
+  // in buildingLayouts that sit to the left of the central stairwell.
+  //   H: 9 units (1102..1118) to the left, then center stairs, then 6 units
+  //   I: 6 units (1129..1119) to the left, then center stairs, then 9 units
+  const centerStairConfig = {
+    H: 9,
+    I: 6
+  };
+
+  function getBeachStairOffsets(building) {
+    const layout1 = buildingLayouts[building];
+    const bf = beachFloor1[building];
+    if (!bf) return { left: 0, right: 0 };
+
+    let left = 0;
+    for (const unit1 of layout1) {
+      if (bf.has(unit1)) left++;
+      else break;
+    }
+
+    let right = 0;
+    for (let i = layout1.length - 1; i >= 0; i--) {
+      if (bf.has(layout1[i])) right++;
+      else break;
+    }
+
+    return { left, right };
+  }
+
+  function makeUnitCell(unit1, floor, building, highlightUnit, gridColumn, gridRow) {
+    const unitNum = floorVersion(unit1, floor);
+    const cell = document.createElement('div');
+    cell.className = 'unit-cell';
+
+    if (isBeachEnd(unitNum, building)) {
+      cell.classList.add('beach-stack');
+      cell.title = `${unitNum} — beach facing`;
+    }
+    if (unitNum === highlightUnit) {
+      cell.classList.add('highlighted');
+    }
+    cell.textContent = unitNum;
+    const total = buildingLayouts[building].length;
+    if (total > 12) {
+      cell.style.fontSize = '.62rem';
+    } else if (total > 9) {
+      cell.style.fontSize = '.68rem';
+    }
+    if (gridColumn) {
+      cell.style.gridColumn = String(gridColumn);
+    }
+    if (gridRow) {
+      cell.style.gridRow = String(gridRow);
+    }
+    return cell;
+  }
+
+  function makeStairCell(text) {
+    const st = document.createElement('div');
+    st.className = 'stair-cell';
+    st.textContent = text;
+    st.setAttribute('aria-label', 'Stairwell');
+    return st;
+  }
+
   function buildDetailView(building, highlightUnit) {
     const wrap = document.getElementById('detail-wrap');
     wrap.innerHTML = '';
 
     const layout1 = buildingLayouts[building];
     const floors = buildingFloors[building] || 3;
+    const leftCount = centerStairConfig[building] !== undefined
+      ? centerStairConfig[building]
+      : layout1.length;
+    const rightCount = layout1.length - leftCount;
+    const hasCenterStair = rightCount > 0;
+    const N = layout1.length;
 
     const div = document.createElement('div');
     div.className = 'bldg-detail';
@@ -305,50 +377,70 @@
     const grid = document.createElement('div');
     grid.className = 'building-grid';
 
+    const beachOffsets = getBeachStairOffsets(building);
+    const leftStairOffset = beachOffsets.left;
+    const rightStairOffset = beachOffsets.right;
+
+    // Column order: floor label | [left beach units] | left stair | [left standard]
+    //               | [center stair] | [right standard] | right stair | [right beach]
+    const cols = ['1.3rem'];
+    for (let i = 0; i < leftStairOffset; i++) cols.push('minmax(2.2rem, 1fr)');
+    cols.push('2.5rem');
+    for (let i = 0; i < leftCount - leftStairOffset; i++) cols.push('minmax(2.2rem, 1fr)');
+    if (hasCenterStair) cols.push('2.5rem');
+    for (let i = 0; i < rightCount - rightStairOffset; i++) cols.push('minmax(2.2rem, 1fr)');
+    cols.push('2.5rem');
+    for (let i = 0; i < rightStairOffset; i++) cols.push('minmax(2.2rem, 1fr)');
+    grid.style.gridTemplateColumns = cols.join(' ');
+
+    const leftStairCol = 2 + leftStairOffset;
+    const centerStairCol = hasCenterStair ? 3 + leftCount : null;
+    const rightStairCol = 3 + N - rightStairOffset + (hasCenterStair ? 1 : 0);
+
+    function unitCol(idx) {
+      const beforeRightStair = N - rightStairOffset;
+      if (idx < leftStairOffset) return idx + 2;
+      if (hasCenterStair) {
+        if (idx < leftCount) return idx + 3;
+        if (idx < beforeRightStair) return idx + 4;
+        return idx + 5;
+      }
+      if (idx < beforeRightStair) return idx + 3;
+      return idx + 4;
+    }
+
     for (let f = floors; f >= 1; f--) {
       const row = document.createElement('div');
       row.className = 'floor-row';
+      const rowNum = floors - f + 1;
 
       const floorLbl = document.createElement('div');
       floorLbl.className = 'floor-label';
       floorLbl.textContent = f;
+      floorLbl.style.gridColumn = '1';
+      floorLbl.style.gridRow = String(rowNum);
       row.appendChild(floorLbl);
 
-      const stL = document.createElement('div');
-      stL.className = 'stair-cell';
-      stL.textContent = 'STR';
-      stL.setAttribute('aria-label', 'Stairwell');
-      row.appendChild(stL);
+      if (f === floors) {
+        const leftStair = makeStairCell('Stairs');
+        leftStair.style.gridColumn = String(leftStairCol);
+        row.appendChild(leftStair);
+      }
 
-      layout1.forEach(unit1 => {
-        const unitNum = floorVersion(unit1, f);
-        const cell = document.createElement('div');
-        cell.className = 'unit-cell';
-
-        if (isBeachEnd(unitNum, building)) {
-          cell.classList.add('beach-stack');
-          cell.title = `${unitNum} — beach-side entry`;
+      layout1.forEach((unit1, idx) => {
+        if (hasCenterStair && idx === leftCount && f === floors) {
+          const centerStair = makeStairCell('Stairs');
+          centerStair.style.gridColumn = String(centerStairCol);
+          row.appendChild(centerStair);
         }
-
-        if (unitNum === highlightUnit) {
-          cell.classList.add('highlighted');
-        }
-
-        cell.textContent = unitNum;
-        if (layout1.length > 12) {
-          cell.style.fontSize = '.62rem';
-        } else if (layout1.length > 9) {
-          cell.style.fontSize = '.68rem';
-        }
-
-        row.appendChild(cell);
+        row.appendChild(makeUnitCell(unit1, f, building, highlightUnit, unitCol(idx), rowNum));
       });
 
-      const stR = document.createElement('div');
-      stR.className = 'stair-cell';
-      stR.textContent = 'STR';
-      stR.setAttribute('aria-label', 'Stairwell');
-      row.appendChild(stR);
+      if (f === floors) {
+        const rightStair = makeStairCell('Stairs');
+        rightStair.style.gridColumn = String(rightStairCol);
+        row.appendChild(rightStair);
+      }
 
       grid.appendChild(row);
     }
@@ -365,8 +457,8 @@
     legend.innerHTML = `
       <div class="legend-item"><div class="legend-swatch" style="background:#E8B339;border-color:#B8860B"></div> Your unit</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#F1E9D2"></div> Standard unit</div>
-      <div class="legend-item"><div class="legend-swatch" style="background:#A88A5C;border-color:#A88A5C"></div> Stairwell</div>
-      ${(building==='H'||building==='I') ? '<div class="legend-item"><div class="legend-swatch" style="background:#D4E2DA;border-color:#7E9C6A"></div> Beach-side entry</div>' : ''}
+      <div class="legend-item"><div class="legend-swatch" style="background:#A88A5C;border-color:#A88A5C"></div> Stairs</div>
+      ${(building==='H'||building==='I') ? '<div class="legend-item"><div class="legend-swatch" style="background:#D4E2DA;border-color:#7E9C6A"></div> Beach Facing Units</div>' : ''}
     `;
     div.appendChild(legend);
 

@@ -31,6 +31,14 @@ This is a static, multi-page community website. There is no build step, no frame
 - **Pool/court redesign:** Pools are now black-outlined, semi-transparent blue circles. Tennis courts are a single large black-outlined, semi-transparent green rectangle labeled “Tennis Courts”.
 - **Mobile optimization:** The Unit Finder page is now designed for phone-first use. The search box stacks vertically with full-width touch targets, the wide property map scrolls horizontally at a readable size, and the building-detail floor rows scroll horizontally with larger unit cells. Mobile-only hints guide users to swipe.
 
+### Unit Finder stairwell and beach-facing unit updates
+
+- **Building detail stairwell representation:** Replaced the per-floor `STR` boxes with single tall brown rectangles labeled **"Stairs"** that span all three floors.
+- **Endcap stairwells for all buildings:** Every building A–I now shows an identical tall "Stairs" rectangle at each end of the unit grid.
+- **H & I center and beach-side stairwells:** Buildings H and I retain their central stairwell and additionally move the stairwell on the beach-facing side so it sits between the beach-facing units and the standard units.
+- **Legend and tooltip update:** Changed "Beach-side entry" to **"Beach Facing Units"** in the legend and unit tooltips.
+- **Overhead map cleanup:** Removed earlier experimental stairwell markers from the SVG property overview map.
+
 ## Notes for resuming work
 
 - Edit HTML and CSS directly. Verify changes by opening the relevant page in a browser.

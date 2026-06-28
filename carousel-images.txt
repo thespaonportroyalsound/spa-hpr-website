@@ -1,0 +1,32 @@
+# Photo carousel images from https://www.imchhi.com/spa
+# StripShowcase component — 23 property photos (5312x2988 native, resized to 1920px wide WebP q80)
+# Source: Wix page-data JSON: a7227c_339d00d94c18882eab1a3fa99ff4e5ff_9522.json
+# Downloaded, converted to WebP, and renamed with descriptive filenames.
+# Files live in images/rasters/photos/.
+
+# Source URL  ->  Local file  (Description)
+# ============================================================
+
+https://static.wixstatic.com/media/a7227c_06806420e7444cf5b2d6fcde3ec52240~mv2.jpg  ->  images/rasters/photos/indoor-pool.webp                       (Indoor heated pool, large covered pool with skylights)
+https://static.wixstatic.com/media/a7227c_18928677448e4497a4282249b23adb06~mv2.jpg  ->  images/rasters/photos/picnic-grills.webp                      (Outdoor picnic tables and charcoal grills between buildings)
+https://static.wixstatic.com/media/a7227c_1bb4eafb136f4838a3cf906fec536e8b~mv2.jpg  ->  images/rasters/photos/outdoor-pool-shuffleboard.webp          (Outdoor pool deck with pavilion, stacked chairs, shuffleboard court)
+https://static.wixstatic.com/media/a7227c_263dbc168e39416f9d541de6c23328af~mv2.jpg  ->  images/rasters/photos/beach-pier-swing.webp                    (Beach area with wooden pier, bench swing, picnic tables)
+https://static.wixstatic.com/media/a7227c_2d248dfe5a18446facad6fc852131ada~mv2.jpg  ->  images/rasters/photos/building-exterior-pines.webp             (Row of condo buildings with green metal roofs, pine trees)
+https://static.wixstatic.com/media/a7227c_38178264a2234fadbc10d749721083c5~mv2.jpg  ->  images/rasters/photos/building-walkway-landscape.webp         (Condo building exterior with walkway and landscaped garden)
+https://static.wixstatic.com/media/a7227c_4eb01cdf451f4615bf00c627a40b1609~mv2.jpg  ->  images/rasters/photos/koi-pond-fountain.webp                   (Koi pond with central fountain, building and palm in background)
+https://static.wixstatic.com/media/a7227c_5a69683267cc4d7b8dbac8b68ab557fc~mv2.jpg  ->  images/rasters/photos/garden-oak-trees.webp                    (Garden lawn with large live oaks draped in Spanish moss, bench)
+https://static.wixstatic.com/media/a7227c_6793e3bee11847c78a355e9fa514bec2~mv2.jpg  ->  images/rasters/photos/beach-access-path.webp                   (Gravel path through live oaks leading to the beach, white pergola)
+https://static.wixstatic.com/media/a7227c_6f2bc1a7a9324a4c9bb0ceac0b05302e~mv2.jpg  ->  images/rasters/photos/entrance-sign-flowers.webp               (The Spa on Port Royal Sound entrance sign, 239 address, pink flowers)
+https://static.wixstatic.com/media/a7227c_71c31ffb566549cf99b4de89b0c0e638~mv2.jpg  ->  images/rasters/photos/pond-turtles-palm.webp                   (Curved pond with ducks, condo building, palm tree)
+https://static.wixstatic.com/media/a7227c_7d32f441db8d45a0915e20863ab9a33e~mv2.jpg  ->  images/rasters/photos/outdoor-pool-hottub.webp                 (Kidney-shaped outdoor pool with hot tub, buildings, majestic oaks)
+https://static.wixstatic.com/media/a7227c_9c6bfd5cf03d4c47a04f5c6cb1f39ead~mv2.jpg  ->  images/rasters/photos/outdoor-pool-round.webp                  (Round outdoor pool near building, pine trees, fence)
+https://static.wixstatic.com/media/a7227c_9d903a73ddf647b3814159dc73fdc24c~mv2.jpg  ->  images/rasters/photos/beach-boardwalk-pier.webp                 (Long wooden boardwalk/pier leading to beach, pink azaleas)
+https://static.wixstatic.com/media/a7227c_a0ce53bf66a14e7181959b9928f9c44f~mv2.jpg  ->  images/rasters/photos/building-azaleas-palm.webp                (Condo building exterior with azaleas and palm trees, pond)
+https://static.wixstatic.com/media/a7227c_a48dda3de1dd43b9a05eb71c159a49c0~mv2.jpg  ->  images/rasters/photos/beach-swing-pergola.webp                  (White pergola with bench swing overlooking the beach and water)
+https://static.wixstatic.com/media/a7227c_a534793930bd4886ae142185d7e91f1a~mv2.jpg  ->  images/rasters/photos/outdoor-pool-hottub-buildings.webp        (Large outdoor pool with hot tub, condo buildings, swim lane)
+https://static.wixstatic.com/media/a7227c_b79027af1865462b9deea79812809ed2~mv2.jpg  ->  images/rasters/photos/pond-palm-flowers.webp                    (Long curved pond surrounded by buildings, pink flowers, palm tree)
+https://static.wixstatic.com/media/a7227c_be118afd4c2b4207957c28e8d080007f~mv2.jpg  ->  images/rasters/photos/pond-fountain-buildings.webp              (Curved pond with tall fountain, surrounded by condo buildings and oaks)
+https://static.wixstatic.com/media/a7227c_c0479e93969148e6a8ecde063cf10511~mv2.jpg  ->  images/rasters/photos/garden-bench-azaleas.webp                  (Garden lawn with bench, azaleas, Club House in background)
+https://static.wixstatic.com/media/a7227c_e3c866d317a449b39b1ca1a8bc41f3e0~mv2.jpg  ->  images/rasters/photos/clubhouse-exterior.webp                    (Single-story clubhouse exterior with green awning, palm tree)
+https://static.wixstatic.com/media/a7227c_eafd31d8dd984b70b8d1b2d45fcf50f4~mv2.jpg  ->  images/rasters/photos/outdoor-pool-pavilion-sedge.webp           (Round outdoor pool with pavilion and rule signs, palm fronds in foreground)
+https://static.wixstatic.com/media/a7227c_edca84fcd84041868159a29da718634d~mv2.jpg  ->  images/rasters/photos/outdoor-pool-pavilion.webp                 (Kidney-shaped outdoor pool with green-roof pavilion, condo buildings)

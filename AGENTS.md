@@ -32,5 +32,5 @@ Hunter-green palette: deep green `#1B3A28`, green `#244C34`, moss accent `#5B7A4
 ## Output
 
 - `index.html`, `rules.html`, `documents.html`, `unit-finder.html` + `style.css` at root
-- `images/` directory for hero, logo, pool/beach photos (placehold if real assets unavailable)
+- `images/` directory for hero, logo, pool/beach photos (real photos staged in `images/rasters/photos/`, see `carousel-images.txt` for the source-URL to filename mapping)
 - Deploy to any static host — no server runtime needed

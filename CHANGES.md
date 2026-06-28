@@ -11,11 +11,21 @@ This is a static, multi-page community website. There is no build step, no frame
 - `documents.html` — Governing document links and manager contacts.
 - `unit-finder.html` — Interactive unit/building finder with an overhead property map.
 - `style.css` — Shared stylesheet for all pages.
-- `images/` — SVG images (`hero.svg`, `map-vector.svg`, `pool.svg`, `beach.svg`).
+- `images/` — SVG images (`map-vector.svg`, `pool.svg`, `beach.svg`).
+- `images/rasters/` — Raster assets (logos and property photos).
+  - `images/rasters/photos/` — 23 real property photos pulled from the previous Wix site's photo carousel, converted to WebP (1920px wide, quality 80). See `carousel-images.txt` for the source-URL to filename mapping with descriptions.
 - `AGENTS.md` — Instructions for anyone editing the site.
 - `CHANGES.md` — This file.
 
 ## Recent changes
+
+### Property photos
+
+- Pulled 23 real property photos from the previous Wix site (`https://www.imchhi.com/spa` photo carousel) and saved them under `images/rasters/photos/` as WebP files (1920px wide, quality 80).
+- **Home page masthead:** the SVG `images/hero.svg` is no longer used as the masthead background. The entrance-sign photo (`images/rasters/photos/entrance-sign-flowers.webp`) is now the masthead background, behind the same dark-green gradient overlay. The `og:image` meta tag now points to this photo so social previews show the entrance sign.
+- **Home page "The Community" section:** added a 6-tile responsive photo gallery between "Key Rules at a Glance" and the footer, with short captions (Outdoor pool & hot tub, Natural beach on Port Royal Sound, Koi pond & gardens, Condo & villa buildings, Picnic & grilling areas, Entrance, 239 Beach City Road). 3 columns on desktop, 2 on phone.
+- **Rules page Pools section:** the two SVG illustrations (`images/pool.svg`, `images/beach.svg`) have been replaced with real photos of the outdoor pool, the natural beach, and the indoor pool. The amenity grid is now 3 columns on desktop, 1 on phone, matching the `repeat(auto-fit, minmax(...))` family used elsewhere.
+- See `carousel-images.txt` for the full source-URL to filename mapping with brief descriptions of each photo.
 
 ### Multi-page site build
 

@@ -99,8 +99,8 @@ a:hover, a:focus { color: var(--green-mid); text-decoration: underline; }
   color: var(--cream);
   text-align: center;
   background:
-    linear-gradient(rgba(27,58,40,.82), rgba(27,58,40,.92)),
-    url("images/hero.svg") center/cover no-repeat;
+    linear-gradient(rgba(27,58,40,.78), rgba(27,58,40,.92)),
+    url("images/rasters/photos/entrance-sign-flowers.webp") center/cover no-repeat;
   background-color: var(--green-deep);
   border-bottom: 3px solid var(--moss);
 }
@@ -239,10 +239,37 @@ tbody td { padding: .75rem 1rem; border-bottom: 1px solid var(--cream-deep); }
 tbody tr:nth-child(even) { background: var(--cream); }
 
 /* Amenity photos */
-.amenity-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin: 1.5rem 0 0; }
+.amenity-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 1.5rem 0 0; }
 .amenity-photos figure { margin: 0; }
-.amenity-photos img { width: 100%; height: auto; border-radius: .5rem; display: block; }
+.amenity-photos img { width: 100%; height: auto; border-radius: .5rem; display: block; aspect-ratio: 3 / 2; object-fit: cover; }
 .amenity-photos figcaption { text-align: center; font-size: .95rem; color: var(--ink-soft); margin-top: .4rem; }
+
+/* Photo gallery (home page) */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+}
+.photo-tile { margin: 0; overflow: hidden; border-radius: .5rem; background: var(--cream-deep); }
+.photo-tile img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  transition: transform .35s ease;
+}
+.photo-tile:hover img, .photo-tile:focus-within img { transform: scale(1.03); }
+.photo-tile figcaption {
+  background: var(--white);
+  color: var(--green-deep);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  padding: .65rem .75rem;
+  border-top: 1px solid var(--cream-deep);
+}
 
 /* Document links */
 .doc-links { list-style: none; padding: 0; }
@@ -497,6 +524,7 @@ tbody tr:nth-child(even) { background: var(--cream); }
   .masthead-inner { padding: 1.25rem 1.25rem 1.1rem; }
   .section { padding: 1.75rem 0; }
   .amenity-photos { grid-template-columns: 1fr; }
+  .photo-gallery { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
 }
 
 /* Focus visibility */

@@ -1,0 +1,343 @@
+/* Unit Finder page-specific styles.
+   The vanilla JS app injects elements with these classes.
+   All colors come from CSS custom properties defined in the root
+   style.css so the page chrome and the app share the same palette. */
+
+/* ===== Layout ============================================================ */
+
+.uf-app {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.uf-section { margin: 0; }
+
+.uf-finder-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-deep, #1B3A28);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.35rem;
+  margin: 0 0 0.75rem;
+  border-bottom: 2px solid var(--moss, #5B7A4B);
+}
+
+/* ===== Search bar ======================================================== */
+
+.uf-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--white, #ffffff);
+  border: 1px solid var(--cream-deep, #E3D6B0);
+  border-left: 5px solid var(--moss, #5B7A4B);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.uf-search-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--green-deep, #1B3A28);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.uf-search-input {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink, #232E26);
+  background: var(--paper, #FBF7EC);
+  border: 2px solid var(--cream-deep, #E3D6B0);
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.8rem;
+  width: 9rem;
+  letter-spacing: 0.05em;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.uf-search-input:focus {
+  border-color: var(--moss, #5B7A4B);
+  background: var(--white, #ffffff);
+}
+
+.uf-search-button {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white, #ffffff);
+  background: var(--moss, #5B7A4B);
+  border: none;
+  border-radius: 0.35rem;
+  padding: 0.55rem 1.3rem;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.2s;
+}
+
+.uf-search-button:hover, .uf-search-button:focus {
+  background: var(--green-mid, #2E5C3E);
+  outline: none;
+}
+
+.uf-result-badge {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--green-deep, #1B3A28);
+  background: var(--cream, #F1E9D2);
+  border-radius: 1rem;
+  padding: 0.35rem 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.uf-result-badge.error {
+  color: #4A2316;
+  background: #F2E3D8;
+}
+.uf-result-badge.hidden { display: none; }
+
+/* ===== Overhead map (scales to fit container) =========================== */
+
+.uf-overview-wrap {
+  background: #f8fafc;
+  border: 1px solid var(--cream-deep, #E3D6B0);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.uf-overview-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--serif, Georgia, serif);
+}
+
+/* SVG element styles (scenery) */
+.uf-overview-svg .building {
+  fill: #cbd5e1;
+  stroke: #475569;
+  stroke-width: 2;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+  cursor: pointer;
+}
+.uf-overview-svg .building:hover { fill: #94a3b8; stroke: #1e293b; }
+.uf-overview-svg .building.highlighted,
+.uf-overview-svg .building.highlighted:hover {
+  fill: #E8B339;
+  stroke: #B8860B;
+  stroke-width: 3;
+}
+.uf-overview-svg .label {
+  fill: #0f172a;
+  font-size: 22px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.uf-overview-svg .context-area {
+  fill: #f1f5f9;
+  stroke: #94a3b8;
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  rx: 4;
+}
+.uf-overview-svg .amenity-label {
+  fill: #0f172a;
+  font-size: 14px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.uf-overview-svg .amenity-label-sm {
+  fill: #0f172a;
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+.uf-overview-svg .tennis-courts {
+  fill: #86EFAC;
+  fill-opacity: 0.25;
+  stroke: #000;
+  stroke-width: 2;
+  rx: 4;
+}
+.uf-overview-svg .pool {
+  fill: #60A5FA;
+  fill-opacity: 0.35;
+  stroke: #000;
+  stroke-width: 2;
+}
+
+/* ===== Building detail (floor-by-floor unit grid) ====================== */
+
+.uf-bldg-detail {
+  width: 100%;
+  background: var(--white, #ffffff);
+  border: 1px solid var(--cream-deep, #E3D6B0);
+  border-left: 5px solid var(--moss, #5B7A4B);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.uf-bldg-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--green-deep, #1B3A28);
+  text-align: center;
+  margin: 0 0 0.25rem;
+}
+
+/* The unit grid. On desktop it fits the container; on mobile the
+   container scrolls horizontally (with no white space because the
+   grid itself is max-content and the scroll is on a bounded wrap). */
+.uf-detail-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.uf-building-grid {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  gap: 3px;
+  width: 100%;
+  min-width: max-content;
+}
+
+.uf-floor-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.72rem, 2.2vw, 0.95rem);
+  font-weight: 600;
+  color: var(--ink-soft, #4D5A50);
+}
+
+.uf-stair-cell {
+  background: #A88A5C;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+  font-weight: 700;
+  color: var(--white, #ffffff);
+  letter-spacing: 0.04em;
+  padding: 6px 4px;
+  min-height: 0;
+  grid-row: 1 / 4;
+}
+
+.uf-unit-cell {
+  background: var(--cream, #F1E9D2);
+  border: 1.5px solid var(--cream-deep, #E3D6B0);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.6rem, 1.8vw, 0.78rem);
+  font-weight: 500;
+  color: var(--ink, #232E26);
+  padding: 4px 2px;
+  min-height: 2.4rem;
+  min-width: 2.4rem;
+  text-align: center;
+  line-height: 1.15;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  /* Allow long unit numbers like 1330 to fit without breaking the cell. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.uf-unit-cell.highlighted {
+  background: #E8B339;
+  border-color: #B8860B;
+  color: var(--ink, #232E26);
+  font-weight: 700;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.35);
+  transform: scale(1.06);
+  z-index: 1;
+  position: relative;
+}
+
+.uf-unit-cell.beach-stack {
+  background: #D4E2DA;
+  border-color: var(--moss-light, #7E9C6A);
+}
+
+.uf-detail-placeholder {
+  color: var(--ink-soft, #4D5A50);
+  font-size: 1rem;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-style: italic;
+  background: var(--white, #ffffff);
+  border: 1px solid var(--cream-deep, #E3D6B0);
+  border-radius: 0.5rem;
+}
+
+/* ===== Mobile hint (shown only on narrow screens) ======================== */
+
+.uf-mobile-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--ink-soft, #4D5A50);
+  margin: 0.4rem 0 0;
+  font-style: italic;
+}
+.uf-map-hint { margin-bottom: 0.25rem; }
+.uf-detail-hint { margin-top: 0.25rem; }
+
+/* ===== Mobile optimizations ============================================== */
+
+@media (max-width: 640px) {
+  .uf-search {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .uf-search-label { font-size: 0.85rem; }
+  .uf-search-input { width: 100%; font-size: 1.15rem; padding: 0.65rem 0.9rem; }
+  .uf-search-button { width: 100%; padding: 0.75rem 1rem; font-size: 1.05rem; }
+  .uf-result-badge {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+  }
+
+  .uf-overview-wrap { padding: 0.35rem; }
+  /* The SVG itself scales to fit (viewBox + width:100%), so no horizontal
+     scroll is needed. The scenery + building positions are preserved
+     because everything is in the 1400x500 viewBox coordinate system. */
+  .uf-overview-svg { font-size: 11px; }
+
+  .uf-bldg-detail { padding: 1rem; }
+  .uf-bldg-label { font-size: 1.2rem; }
+  .uf-unit-cell {
+    min-width: 2.2rem;
+    min-height: 2.6rem;
+    padding: 0.3rem 0.2rem;
+  }
+  .uf-unit-cell.highlighted { transform: scale(1.08); }
+  .uf-stair-cell { font-size: 0.65rem; padding: 4px 2px; }
+
+  .uf-mobile-hint { display: block; }
+}

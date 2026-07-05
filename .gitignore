@@ -1,0 +1,7 @@
+# OS
+.DS_Store
+
+# Build artifacts (mirrored inside each subproject)
+node_modules/
+target/
+.shadow-cljs/

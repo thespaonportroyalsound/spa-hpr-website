@@ -10,11 +10,11 @@ To change the site: edit the HTML/CSS in place and verify by opening the relevan
 
 ## Hard constraints
 
-- **Vanilla HTML + CSS only.** No framework, no build step, no package manager, no npm scripts. If you reach for a tool, stop. `unit-finder.html` uses a small amount of inline vanilla JavaScript to drive the finder — no libraries, no build step.
+- **Vanilla HTML + CSS only.** No framework, no build step, no package manager, no npm scripts. If you reach for a tool, stop. `unit-finder.html` loads a small vanilla JavaScript file (`unit-finder/unit-finder.js`) to drive the finder — no libraries, no build step.
 - **Multi-page layout** (four pages) with a shared top navbar linking between pages.
   - `index.html` — Home: welcome intro + key rules at a glance (pet policy, parking cost, quiet hours, pool hours, prohibited vehicles, trash/walkways).
   - `rules.html` — Full rules & regulations (warnings, parking, quiet hours, pools, trash, walkways, service animals).
-  - `unit-finder.html` — Interactive unit & building finder. Enter a unit number to see which of the nine buildings (A–I) it is in and where it sits within that building, paired with an overhead property map. Unit-to-building data, floor-1 unit layouts, and stairwell positions live in inline JS at the bottom of the file and can be edited in place.
+  - `unit-finder.html` — Interactive unit & building finder. Enter a unit number to see which of the nine buildings (A–I) it is in and where it sits within that building, paired with an overhead property map. Unit-to-building data, floor-1 unit layouts, and stairwell positions live in `unit-finder/unit-finder.js` and can be edited in place. Page-specific styles are in `unit-finder/public/css/unit-finder.css`.
   - `documents.html` — Governing document links + contacts for both managers.
 - **Public information only.** Do not add private resident-only content.
 

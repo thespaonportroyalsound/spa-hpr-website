@@ -267,15 +267,44 @@
       role: "img",
       "aria-label": "Overhead map of The Spa on Port Royal Sound, HPR. Beach on the right, parking on the left. Tap a building to view its floor plan."
     },
-      // Scenery (drawn first, behind buildings) — non-beach only
+      // Scenery (drawn first, behind buildings) — non-beach only.
+      // Amenity boxes and their labels (centered in each box).
+      // Tennis Courts box: 155-365 wide, 140-360 tall. Center (260, 250).
       h("rect", { class: "tennis-courts", x: 155, y: 140, width: 210, height: 220, rx: 4 }),
-      h("text", { class: "amenity-label", x: 260, y: 255 }, "Tennis Courts"),
+      h("text", { class: "amenity-label", x: 260, y: 250 }, "Tennis Courts"),
+      // Context box: 460-580 wide, 160-340 tall.
+      // Indoor Pool & Fitness centered in top half (center y=205, two lines).
       h("rect", { class: "context-area", x: 460, y: 160, width: 120, height: 180 }),
-      h("text", { class: "amenity-label", x: 520, y: 188 }, "Indoor Pool &"),
-      h("text", { class: "amenity-label", x: 520, y: 212 }, "Fitness Center"),
-      h("text", { class: "amenity-label", x: 520, y: 318 }, "HOA Office"),
+      h("text", { class: "amenity-label", x: 520, y: 200 }, "Indoor Pool &"),
+      h("text", { class: "amenity-label", x: 520, y: 218 }, "Fitness Center"),
+      // HOA Office centered in bottom half (center y=295).
+      h("text", { class: "amenity-label", x: 520, y: 295 }, "HOA Office"),
+      // Family Pool circle: center (740, 250), r=45.
       h("circle", { class: "pool", cx: 740, cy: 250, r: 45 }),
-      h("text", { class: "amenity-label", x: 740, y: 255 }, "Family Pool"),
+      h("text", { class: "amenity-label", x: 740, y: 250 }, "Family Pool"),
+      // Dumpsters along the perimeter. The dumpster SVG (82x72 viewBox) is
+      // displayed at 40x35 and centered at the given coordinate via
+      // x = cx - 20, y = cy - 17.
+      // Three at top right, above the HOA office
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 450, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 520, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 590, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      // One above building B (B is at x=400-440, y=140-360). Centered at (420, 100).
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 400, y: 83, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      // Far left, between buildings A (y=60-100) and D (y=180-320). Centered at (110, 130).
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 90, y: 113, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      // Bottom left corner of the map. Centered at (70, 470).
+      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
+        x: 50, y: 453, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
+      // Entry / exit gate on the right edge of building C (C ends at x=380, y=440).
+      // The gate SVG (161x91 viewBox) is displayed at 70x40, centered at (380, 480).
+      h("image", { class: "map-icon", href: "images/main-gate.drawio.svg",
+        x: 345, y: 460, width: 70, height: 40, preserveAspectRatio: "xMidYMid meet" }),
       // Buildings (drawn on top)
       ...buildingGroups
     );

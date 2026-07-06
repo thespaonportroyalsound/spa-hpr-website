@@ -2,11 +2,11 @@
  *
  * Layout (top to bottom, single scroll):
  *   1. Search bar  (unit number + Find button + result/error badge)
- *   2. Property overview map  (9 clickable buildings + scenery, 1400x500 SVG)
+ *   2. Property overview map  (9 clickable buildings, inlined SVG)
  *   3. Building detail  (floor-by-floor grid of unit cells with stairs)
  *
  * Single flat file. Top to bottom:
- *   1. Raw data (units, layouts, building metadata, scenery SVG snippets)
+ *   1. Raw data (units, layouts, building metadata, inline SVG map)
  *   2. State
  *   3. Pure helpers (lookups, grid layout math)
  *   4. DOM construction (h() helper + section builders)
@@ -16,7 +16,6 @@
  */
 (function () {
   "use strict";
-
   /* ============================================================
    * 1. RAW DATA
    * The source of truth for what unit maps to what building.
@@ -220,126 +219,89 @@
     return { rootEl, inputEl, badgeEl };
   }
 
+
+  /* ============================================================
+   * The overhead map.  A high-res raster (source:
+   * images/theSpa-LabeledSVG.svg, exported to
+   * images/spa-map-base.webp at 2706×936) is the base layer.
+   * A transparent SVG overlay sits on top so individual
+   * buildings are clickable and the selected one highlights
+   * with a gold fill.
+   * ============================================================ */
+
+  // Overlay shape data for each building, taken directly from the
+  // original SVG.  The <rect> template is (309,653,653,160);
+  // the transform matrix positions and rotates it.
+  const BLDG_SHAPES = [
+    { letter:"A", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0.802423,0,0,0.802423,15.560112,-329.207363)" },
+    { letter:"B", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0,0.802423,-0.802423,0,1479.982293,-41.939888)" },
+    { letter:"C", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0.802423,0,0,0.802423,15.560112,88.855079)" },
+    { letter:"D", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0,0.634074,-0.802423,0,747.369991,65.045969)" },
+    { letter:"E", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0.563526,0,0,0.802423,1338.379407,-329.207363)" },
+    { letter:"F", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0.563526,0,0,0.802423,1338.379407,88.855079)" },
+    { letter:"G", type:"rect", x:309, y:653, w:653, h:160, tf:"matrix(0,0.634074,-0.802423,0,1996.369991,65.045969)" },
+    { letter:"I", type:"polygon", pts:"2258.509,822.225 2256.782,822.289 1901.338,727.049 1934.568,603.036 2273.444,693.837 2626.491,693.837 2626.491,822.225 2258.509,822.225", tf:"matrix(1,0,0,1,24,-80.162543)" },
+    { letter:"H", type:"polygon", pts:"2258.509,822.225 2256.782,822.289 1901.338,727.049 1934.568,603.036 2273.444,693.837 2626.491,693.837 2626.491,822.225 2258.509,822.225", tf:"matrix(1,0,0,-1,23,1016.162543)" }
+  ];
+
   // Build the property overview map. Returns { rootEl, tileEls, mapEl }.
-  // The map is an inline SVG (1400x500 viewBox) with scenery and 9 building
-  // <g> elements.  Scenery positions match images/map-vector.svg.
   function buildOverheadMap() {
     const tileEls = {};
-    const buildingGroups = BUILDING_LETTERS.map((letter) => {
-      const pos = BUILDING_POS[letter];
-      const shape = pos.type === "rect"
-        ? h("rect", {
-            class: "building", x: pos.x, y: pos.y,
-            width: pos.w, height: pos.h, rx: 4
-          })
-        : h("polygon", { class: "building", points: pos.points, "stroke-linejoin": "round" });
-      const labelCx = pos.type === "rect" ? pos.x + pos.w / 2 : polygonCentroid(pos.points).x;
-      const labelCy = pos.type === "rect" ? pos.y + pos.h / 2 : polygonCentroid(pos.points).y;
-      const groupEl = h("g", {
-        id: "bldg-" + letter.toLowerCase(),
-        class: "bldg-group",
-        role: "button",
-        tabIndex: 0,
-        "aria-label": FULL_NAMES[letter]
-      },
-        shape,
-        h("text", { class: "label", x: labelCx, y: labelCy }, letter)
-      );
-      groupEl.dataset.building = letter;
-      groupEl.addEventListener("click", () => selectBuilding(letter));
-      groupEl.addEventListener("keydown", (e) => {
+
+    // Build each building shape as an overlay SVG element.
+    // The h() helper creates SVG elements via createElementNS.
+    const overlayShapes = BLDG_SHAPES.map((s) => {
+      let el;
+      if (s.type === "rect") {
+        el = h("rect", {
+          "data-building": s.letter,
+          class: "bldg-shape bldg-" + s.letter,
+          x: s.x, y: s.y, width: s.w, height: s.h,
+          transform: s.tf
+        });
+      } else {
+        el = h("polygon", {
+          "data-building": s.letter,
+          class: "bldg-shape bldg-" + s.letter,
+          points: s.pts,
+          transform: s.tf
+        });
+      }
+      // Click + keyboard handler.
+      el.addEventListener("click", () => selectBuilding(s.letter));
+      el.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          selectBuilding(letter);
+          selectBuilding(s.letter);
         }
       });
-      // Store { group, shape } so updates can toggle the highlight
-      // without re-querying the DOM.
-      tileEls[letter] = { group: groupEl, shape: shape };
-      return groupEl;
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("aria-label", FULL_NAMES[s.letter]);
+      tileEls[s.letter] = { shape: el };
+      return el;
     });
 
     const mapEl = h("svg", {
-      class: "uf-overview-svg",
-      viewBox: "0 0 1400 500",
-      preserveAspectRatio: "xMidYMid meet",
       xmlns: SVG_NS,
+      class: "uf-map-overlay",
+      viewBox: "0 0 2706 936",
+      preserveAspectRatio: "xMidYMid meet",
       role: "img",
       "aria-label": "Overhead map of The Spa on Port Royal Sound, HPR. Beach on the right, parking on the left. Tap a building to view its floor plan."
-    },
-      // Scenery (drawn first, behind buildings) — non-beach only.
-      // Amenity boxes and their labels (centered in each box).
-      // Tennis Courts box: 155-365 wide, 140-360 tall. Center (260, 250).
-      h("rect", { class: "tennis-courts", x: 155, y: 140, width: 210, height: 220, rx: 4 }),
-      h("text", { class: "amenity-label", x: 260, y: 250 }, "Tennis Courts"),
-      // Context box: 460-580 wide, 160-340 tall.
-      // Indoor Pool & Fitness centered in top half (center y=205, two lines).
-      h("rect", { class: "context-area", x: 460, y: 160, width: 120, height: 180 }),
-      h("text", { class: "amenity-label", x: 520, y: 200 }, "Indoor Pool &"),
-      h("text", { class: "amenity-label", x: 520, y: 218 }, "Fitness Center"),
-      // HOA Office centered in bottom half (center y=295).
-      h("text", { class: "amenity-label", x: 520, y: 295 }, "HOA Office"),
-      // Family Pool circle: center (740, 250), r=45.
-      h("circle", { class: "pool", cx: 740, cy: 250, r: 45 }),
-      h("text", { class: "amenity-label", x: 740, y: 250 }, "Family Pool"),
-      // Dumpsters along the perimeter. The dumpster SVG (82x72 viewBox) is
-      // displayed at 40x35 and centered at the given coordinate via
-      // x = cx - 20, y = cy - 17.
-      // Three at top right, above the HOA office
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 450, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 520, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 590, y: 33, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      // One above building B (B is at x=400-440, y=140-360). Centered at (420, 100).
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 400, y: 83, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      // Far left, between buildings A (y=60-100) and D (y=180-320). Centered at (110, 130).
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 90, y: 113, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      // Bottom left corner of the map. Centered at (70, 470).
-      h("image", { class: "map-icon", href: "images/dumpster.drawio.svg",
-        x: 50, y: 453, width: 40, height: 35, preserveAspectRatio: "xMidYMid meet" }),
-      // Entry / exit gate on the right edge of building C (C ends at x=380, y=440).
-      // The gate SVG (161x91 viewBox) is displayed at 70x40, centered at (380, 480).
-      h("image", { class: "map-icon", href: "images/main-gate.drawio.svg",
-        x: 345, y: 460, width: 70, height: 40, preserveAspectRatio: "xMidYMid meet" }),
-      // Buildings (drawn on top)
-      ...buildingGroups
-    );
+    }, ...overlayShapes);
 
     const rootEl = h("div", { class: "uf-overview-wrap" },
-      mapEl,
-      h("p", { class: "uf-mobile-hint uf-map-hint" }, "Swipe left/right to pan the property map.")
+      h("div", { class: "uf-map-stage" },
+        h("img", { class: "uf-map-base", src: "images/spa-map-base.webp",
+          alt: "Overhead property map of The Spa on Port Royal Sound, HPR." }),
+        mapEl
+      ),
+      h("p", { class: "uf-mobile-hint uf-map-hint" },
+        "Swipe left/right to pan the property map.")
     );
+
     return { rootEl, tileEls, mapEl };
   }
-
-  // Polygon centroid (for H and I label placement).
-  function polygonCentroid(points) {
-    const xs = [], ys = [];
-    for (const p of points.split(/\s+/)) {
-      const [x, y] = p.split(",").map(Number);
-      xs.push(x); ys.push(y);
-    }
-    const n = xs.length;
-    return { x: xs.reduce((a, b) => a + b, 0) / n, y: ys.reduce((a, b) => a + b, 0) / n };
-  }
-
-  // Building positions on the overhead map (1400x500 viewBox).
-  const BUILDING_POS = {
-    A: { type: "rect",   x: 180, y:  60, w: 200, h: 40 },
-    B: { type: "rect",   x: 400, y: 140, w:  40, h: 220 },
-    C: { type: "rect",   x: 180, y: 400, w: 200, h: 40 },
-    D: { type: "rect",   x:  80, y: 180, w:  40, h: 140 },
-    E: { type: "rect",   x: 660, y: 110, w: 160, h: 40 },
-    F: { type: "rect",   x: 660, y: 350, w: 160, h: 40 },
-    G: { type: "rect",   x: 600, y: 180, w:  40, h: 140 },
-    H: { type: "polygon", points: "850,130 970,80 1120,80 1120,120 980,120 870,170" },
-    I: { type: "polygon", points: "850,370 970,420 1120,420 1120,380 980,380 870,330" }
-  };
-
   // Build the building detail section. Returns refs needed for updates.
   // The grid is CSS-driven (grid-template-columns) so we only need to
   // update the label text and the highlighted unit class.

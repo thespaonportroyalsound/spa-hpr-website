@@ -11,7 +11,7 @@ This is a static, multi-page community website. There is no build step, no frame
 - `documents.html` — Governing document links and manager contacts.
 - `unit-finder.html` — Interactive unit/building finder with an overhead property map.
 - `style.css` — Shared stylesheet for all pages.
-- `images/` — SVG images (`map-vector.svg`, `pool.svg`, `beach.svg`).
+- `images/` — Overhead property map. The static base is a 30KB WebP (`spa-map-base.webp`, exported from the source SVG at 2706×936, 3× the display size). The source files are `theSpa-LabeledSVG.svg` (the export-ready SVG with white background and gray buildings) and `theSpa-LabeledSVG.af` (the Affinity source).
 - `images/rasters/` — Raster assets (logos and property photos).
   - `images/rasters/photos/` — 23 real property photos pulled from the previous Wix site's photo carousel, converted to WebP (1920px wide, quality 80). See `carousel-images.txt` for the source-URL to filename mapping with descriptions.
 - `AGENTS.md` — Instructions for anyone editing the site.
@@ -41,6 +41,17 @@ This is a static, multi-page community website. There is no build step, no frame
 - **Pool/court redesign:** Pools are now black-outlined, semi-transparent blue circles. Tennis courts are a single large black-outlined, semi-transparent green rectangle labeled “Tennis Courts”.
 - **Mobile optimization:** The Unit Finder page is now designed for phone-first use. The search box stacks vertically with full-width touch targets, the wide property map scrolls horizontally at a readable size, and the building-detail floor rows scroll horizontally with larger unit cells. Mobile-only hints guide users to swipe.
 
+### Overhead map moved to a raster image + overlay
+
+The Unit Finder's overhead property map was rewritten to use a high-resolution raster base instead of an inlined SVG. This is much friendlier for downstream tooling (LLMs, image editors, future exports) and the JS file dropped from ~100KB to ~24KB.
+
+- **Source of truth:** `images/theSpa-LabeledSVG.af` (Affinity Designer). Edit the map there and re-export.
+- **Vector export:** `images/theSpa-LabeledSVG.svg` — the Affinity export with a white background and light-gray building fills so it stands on its own. Each building has `id="Building-A"` through `id="Building-I"` for tooling.
+- **Raster base:** `images/spa-map-base.webp` — 30KB, 2706×936 (3× the display size) so it stays sharp on retina screens. Exported from the SVG via headless Chrome.
+- **Interactive overlay:** `unit-finder.js` builds a small inline `<svg class="uf-map-overlay" viewBox="0 0 2706 936">` with one shape per building (7 `<rect>` for A–G, 2 `<polygon>` for the H and I parallelograms). The shapes use the same transform matrices as the source SVG so they sit exactly on top of the buildings in the image. Default fill is transparent; the highlighted building gets a gold fill (`rgba(232,179,57,0.45)`) and a dark-gold border.
+- **Layout:** `.uf-map-stage` uses `aspect-ratio: 2706/936` to lock the overlay to the image, so the hit areas stay aligned at any display width.
+- **Removed:** `images/map-vector.svg`, `images/hero.svg`, `images/pool.svg`, `images/beach.svg`, `images/dumpster.drawio.svg`, `images/main-gate.drawio.svg` — all no longer referenced by any HTML or JS file.
+
 ### Unit Finder stairwell and beach-facing unit updates
 
 - **Building detail stairwell representation:** Replaced the per-floor `STR` boxes with single tall brown rectangles labeled **"Stairs"** that span all three floors.
@@ -53,5 +64,5 @@ This is a static, multi-page community website. There is no build step, no frame
 
 - Edit HTML and CSS directly. Verify changes by opening the relevant page in a browser.
 - `unit-finder.html` contains inline JavaScript at the bottom with the unit-to-building mappings, floor-1 layouts, and stairwell positions.
-- `images/map-vector.svg` and the inline SVG inside `unit-finder.html` should be kept in sync. The external SVG file is kept as a standalone asset; the inlined copy is what the page actually renders.
+- The overhead map is a WebP (`images/spa-map-base.webp`) with a transparent SVG overlay for click handlers and highlights. To change the map itself, edit `images/theSpa-LabeledSVG.af` in Affinity, re-export to `images/theSpa-LabeledSVG.svg`, and re-render the WebP (e.g. with headless Chrome at 2706×936). The overlay shape data in `unit-finder.js` (`BLDG_SHAPES`) only needs to change if you reposition a building.
 - The site is ready to deploy to any static host.

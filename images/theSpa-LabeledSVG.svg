@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 2706 936" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g id="Building-C" serif:id="Building C" transform="matrix(0.802423,0,0,0.802423,15.560112,88.855079)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:10.39px;"/>
+    </g>
+    <g id="Building-A" serif:id="Building A" transform="matrix(0.802423,0,0,0.802423,15.560112,-329.207363)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:10.39px;"/>
+    </g>
+    <g id="Building-B" serif:id="Building B" transform="matrix(0,0.802423,-0.802423,0,1479.982293,-41.939888)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:10.39px;"/>
+    </g>
+    <g id="Building-D" serif:id="Building D" transform="matrix(0,0.634074,-0.802423,0,747.369991,65.045969)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:11.52px;"/>
+    </g>
+    <g id="Building-E" serif:id="Building E" transform="matrix(0.563526,0,0,0.802423,1338.379407,-329.207363)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:12.02px;"/>
+    </g>
+    <g id="Building-F" serif:id="Building F" transform="matrix(0.563526,0,0,0.802423,1338.379407,88.855079)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:12.02px;"/>
+    </g>
+    <g id="Building-G" serif:id="Building G" transform="matrix(0,0.634074,-0.802423,0,1996.369991,65.045969)">
+        <rect x="309" y="653" width="653" height="160" style="fill:none;stroke:black;stroke-width:11.52px;"/>
+    </g>
+    <g id="Building-I" serif:id="Building I" transform="matrix(1,0,0,1,24,-80.162543)">
+        <path d="M2258.509,822.225L2256.782,822.289L1901.338,727.049L1934.568,603.036L2273.444,693.837L2626.491,693.837L2626.491,822.225L2258.509,822.225Z" style="fill:none;stroke:black;stroke-width:8.33px;"/>
+    </g>
+    <g id="Building-H" serif:id="Building H" transform="matrix(1,0,0,-1,23,1016.162543)">
+        <path d="M2258.509,822.225L2256.782,822.289L1901.338,727.049L1934.568,603.036L2273.444,693.837L2626.491,693.837L2626.491,822.225L2258.509,822.225Z" style="fill:none;stroke:black;stroke-width:8.33px;"/>
+    </g>
+    <g id="Indoor-Pool---Fitness-Center" serif:id="Indoor Pool / Fitness Center" transform="matrix(1,0,0,1,-56,39)">
+        <rect x="1092" y="203" width="228" height="226" style="fill:none;stroke:black;stroke-width:8.33px;"/>
+    </g>
+    <g id="HOA-Office" serif:id="HOA Office" transform="matrix(1,0,0,1,-56,265)">
+        <rect x="1092" y="203" width="228" height="226" style="fill:none;stroke:black;stroke-width:8.33px;"/>
+    </g>
+    <g id="Entry-Exit-Gate" serif:id="Entry/Exit Gate" transform="matrix(1,0,0,1,-11,10)">
+        <rect x="617" y="809" width="179" height="96" style="fill:none;stroke:black;stroke-width:8.33px;"/>
+    </g>
+    <g>
+        <g transform="matrix(1,0,0,1,167,192)">
+            <rect x="340" y="25.312" width="42.938" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,382.9375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">A</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-202,406.328125)">
+            <rect x="340" y="25.312" width="47.938" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,387.9375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">D</text>
+        </g>
+        <g transform="matrix(1,0,0,1,526,406.328125)">
+            <rect x="340" y="25.312" width="41.844" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,381.84375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">B</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1048,406.328125)">
+            <rect x="340" y="25.312" width="46.406" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,386.40625,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">G</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1333.1875,197)">
+            <rect x="340" y="25.312" width="41.812" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,381.8125,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">E</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1336.65625,606)">
+            <rect x="340" y="25.312" width="38.344" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,378.34375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">F</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1950.0625,613)">
+            <rect x="340" y="25.312" width="24.938" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,364.9375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">I</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1922.84375,199)">
+            <rect x="340" y="25.312" width="52.156" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,392.15625,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">H</text>
+        </g>
+        <g transform="matrix(5.080724,0,0,5.080724,-667.112911,-70.21616)">
+            <rect x="338.393" y="78.585" width="36.665" height="6.709" style="fill:white;fill-opacity:0;"/>
+            <rect x="337.202" y="85.295" width="39.046" height="6.709" style="fill:white;fill-opacity:0;"/>
+            <text x="338.393px" y="84px" style="font-family:'Georgia', serif;font-size:5.905px;">Indoor Pool &amp;</text>
+            <g transform="matrix(5.90467,0,0,5.90467,376.24885,90.709066)">
+            </g>
+            <text x="338.627px" y="90.709px" style="font-family:'Georgia', serif;font-size:5.905px;">Fitness Center</text>
+        </g>
+        <g transform="matrix(5.080724,0,0,5.080724,-669.112911,157.78384)">
+            <rect x="340" y="77.503" width="35.559" height="8.051" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(7.085604,0,0,7.085604,362.78257,84)">
+            </g>
+            <g transform="matrix(7.085604,0,0,7.085604,364.897143,84)">
+            </g>
+            <g transform="matrix(7.085604,0,0,7.085604,367.011716,84)">
+            </g>
+            <g transform="matrix(7.085604,0,0,7.085604,375.559491,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:7.086px;">HOA Oﬃce</text>
+        </g>
+        <g transform="matrix(5.080724,0,0,5.080724,-1067.112911,452.78384)">
+            <rect x="340" y="77.503" width="14.579" height="8.051" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(7.085604,0,0,7.085604,354.579461,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:7.086px;">Gate</text>
+        </g>
+        <g transform="matrix(1,0,0,1,153,614)">
+            <rect x="340" y="25.312" width="41.094" height="72.719" style="fill:white;fill-opacity:0;"/>
+            <g transform="matrix(64,0,0,64,381.09375,84)">
+            </g>
+            <text x="340px" y="84px" style="font-family:'Georgia', serif;font-size:64px;">C</text>
+        </g>
+    </g>
+</svg>

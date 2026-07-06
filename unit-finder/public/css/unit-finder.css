@@ -102,7 +102,7 @@
 }
 .uf-result-badge.hidden { display: none; }
 
-/* ===== Overhead map (scales to fit container) =========================== */
+/* ===== Overhead map (image + transparent overlay) ======================= */
 
 .uf-overview-wrap {
   background: #f8fafc;
@@ -112,71 +112,51 @@
   overflow: hidden;
 }
 
-.uf-overview-svg {
+/* The stage locks the overlay to the image's exact dimensions. */
+.uf-map-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2706 / 936;
+}
+
+.uf-map-base {
   display: block;
   width: 100%;
   height: auto;
-  font-family: var(--serif, Georgia, serif);
 }
 
-/* SVG element styles (scenery) */
-.uf-overview-svg .building {
-  fill: #cbd5e1;
-  stroke: #475569;
-  stroke-width: 2;
+.uf-map-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Building shapes on the overlay.  Background image already paints
+   them in light gray; the overlay is fully transparent by default
+   so the static map looks complete on its own. */
+.uf-map-overlay .bldg-shape {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 4;
   transition: fill 0.2s ease, stroke 0.2s ease;
   cursor: pointer;
+  pointer-events: all;
 }
-.uf-overview-svg .building:hover { fill: #94a3b8; stroke: #1e293b; }
-.uf-overview-svg .building.highlighted,
-.uf-overview-svg .building.highlighted:hover {
-  fill: #E8B339;
+
+/* Hover: just a faint outline to show the shape is clickable. */
+.uf-map-overlay .bldg-shape:hover {
+  stroke: #475569;
+  stroke-opacity: 0.5;
+}
+
+/* Highlighted (selected) building: gold wash over the shape. */
+.uf-map-overlay .bldg-shape.highlighted,
+.uf-map-overlay .bldg-shape.highlighted:hover {
+  fill: rgba(232, 179, 57, 0.45);
   stroke: #B8860B;
-  stroke-width: 3;
-}
-.uf-overview-svg .label {
-  fill: #0f172a;
-  font-size: 22px;
-  font-weight: 700;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-}
-.uf-overview-svg .context-area {
-  fill: #f1f5f9;
-  stroke: #94a3b8;
-  stroke-width: 2;
-  stroke-dasharray: 6 4;
-  rx: 4;
-}
-.uf-overview-svg .amenity-label {
-  fill: #0f172a;
-  font-size: 14px;
-  font-weight: 600;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-}
-.uf-overview-svg .amenity-label-sm {
-  fill: #0f172a;
-  font-size: 12px;
-  font-weight: 600;
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-}
-.uf-overview-svg .tennis-courts {
-  fill: #86EFAC;
-  fill-opacity: 0.25;
-  stroke: #000;
-  stroke-width: 2;
-  rx: 4;
-}
-.uf-overview-svg .pool {
-  fill: #60A5FA;
-  fill-opacity: 0.35;
-  stroke: #000;
-  stroke-width: 2;
+  stroke-width: 4;
+  stroke-opacity: 1;
 }
 
 /* ===== Building detail (floor-by-floor unit grid) ====================== */
@@ -324,10 +304,9 @@
   }
 
   .uf-overview-wrap { padding: 0.35rem; }
-  /* The SVG itself scales to fit (viewBox + width:100%), so no horizontal
-     scroll is needed. The scenery + building positions are preserved
-     because everything is in the 1400x500 viewBox coordinate system. */
-  .uf-overview-svg { font-size: 11px; }
+  /* The image scales to fit the container via width:100%.  The
+     overlay SVG uses the same viewBox (2706×936) and aspect-ratio
+     so the hit areas stay aligned at any display width. */
 
   .uf-bldg-detail { padding: 1rem; }
   .uf-bldg-label { font-size: 1.2rem; }

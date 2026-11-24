@@ -231,12 +231,26 @@ li { margin: 0 0 .6rem; }
   border-left: 4px solid var(--moss);
 }
 
+/* Screen-reader-only text */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Tables */
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 1.05rem; min-width: 32rem; }
 thead th { background: var(--green-deep); color: var(--cream); text-align: left; padding: .75rem 1rem; }
 tbody td { padding: .75rem 1rem; border-bottom: 1px solid var(--cream-deep); }
 tbody tr:nth-child(even) { background: var(--cream); }
+#pest-control-months time { font-weight: 700; }
 
 /* Amenity photos */
 .amenity-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 1.5rem 0 0; }

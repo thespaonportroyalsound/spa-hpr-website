@@ -10,6 +10,7 @@ This is a static, multi-page community website. There is no build step, no frame
 - `rules.html` — Full rules & regulations.
 - `documents.html` — Governing document links and manager contacts.
 - `unit-finder.html` — Interactive unit/building finder with an overhead property map.
+- `pest-control.html` — Orkin pest control schedule table with yearly date rollover.
 - `style.css` — Shared stylesheet for all pages.
 - `images/` — Overhead property map. The static base is a 30KB WebP (`spa-map-base.webp`, exported from the source SVG at 2706×936, 3× the display size). The source files are `theSpa-LabeledSVG.svg` (the export-ready SVG with white background and gray buildings) and `theSpa-LabeledSVG.af` (the Affinity source).
 - `images/rasters/` — Raster assets (logos and property photos).
@@ -18,6 +19,21 @@ This is a static, multi-page community website. There is no build step, no frame
 - `CHANGES.md` — This file.
 
 ## Recent changes
+
+### Pest control schedule moved to its own page
+
+- The Pest Control Schedule section moved from the home page to `pest-control.html`, linked as **Pest Control** in the top navbar of every page.
+- The new page keeps the month-by-month schedule table (with its automatic year rollover script); the visit day numbers in the date columns are bolded.
+- The home page no longer contains the schedule table or its inline script.
+- `style.css` gained a `.visually-hidden` utility, used for the schedule table caption.
+- Added a pointer to the schedule page in the Documents page's "Community Information & Notices" section.
+
+### Content and link updates
+
+- **Documents & Contact:** all PDF links re-checked against imchhi.com/spa. Only the Community Layout Map had moved — it now points to `a7227c_c512661056f8494283359d2a2e7157b7.pdf`.
+- **Home page Internet & TV Service:** now reads "Internet and Cable TV is included with The Spa's association dues," links to Spectrum's home page, and shows a bold **Bulk Account Number:** label with the account number in plain text.
+- **Rules page parking table:** the hang tag row is renamed **Contractor Annual Hang Tag** and moved to the bottom of the table.
+- **Rules page pools section:** photo caption shortened from "Fish Haul Creek Beach" to "Fish Haul Creek".
 
 ### Property photos
 

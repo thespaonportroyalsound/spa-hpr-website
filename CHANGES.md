@@ -13,12 +13,26 @@ This is a static, multi-page community website. There is no build step, no frame
 - `pest-control.html` — Orkin pest control schedule table with yearly date rollover.
 - `style.css` — Shared stylesheet for all pages.
 - `images/` — Overhead property map. The static base is a 30KB WebP (`spa-map-base.webp`, exported from the source SVG at 2706×936, 3× the display size). The source files are `theSpa-LabeledSVG.svg` (the export-ready SVG with white background and gray buildings) and `theSpa-LabeledSVG.af` (the Affinity source).
-- `images/rasters/` — Raster assets (logos and property photos).
-  - `images/rasters/photos/` — 23 real property photos pulled from the previous Wix site's photo carousel, converted to WebP (1920px wide, quality 80). See `carousel-images.txt` for the source-URL to filename mapping with descriptions.
+- `images/rasters/` — Raster assets (logo, favicon, touch icon).
+  - `images/rasters/photos/` — the eight property photos in use, each as `-800.webp` (800×534) and `-400.webp` (400×267) for `srcset`. The 1920px originals of all 24 carousel photos are in git history. See `carousel-images.txt` for the source-URL mapping.
+- `fonts/` — Self-hosted Source Serif 4 (`source-serif-4-latin-var.woff2`, variable 400–700, latin subset) plus its OFL license.
+- `_headers` — Cloudflare Workers cache policy (immutable caching for images and fonts).
+- `.assetsignore` — Repo-only files that must not be published as site assets.
 - `AGENTS.md` — Instructions for anyone editing the site.
 - `CHANGES.md` — This file.
 
 ## Recent changes
+
+### Performance pass — no third-party requests, images sized for display
+
+- **Photos:** the 8 photos in use were 1920×1080 at 350–670 KB each. Each is now two variants, `-800.webp` (800×534) and `-400.webp` (400×267), cropped to the 3:2 box the pages display and served with `srcset`/`sizes`. The 15 unused carousel photos (7.3 MB) and all 1920px originals were removed from the working tree; they remain in git history.
+- **Masthead:** the hero is now an `<img class="masthead-bg">` (1152×648, ~91 KB) with `fetchpriority="high"` behind the same dark-green gradient, instead of a CSS background that pulled the 631 KB gallery photo.
+- **Logo and icons:** the header logo is `images/rasters/site-logo-260.webp` (22 KB, was a 117 KB PNG); the favicon is 48×48 (4 KB, was 146 KB), plus a 180×180 apple-touch icon.
+- **Fonts:** Source Serif 4 is self-hosted (`fonts/source-serif-4-latin-var.woff2`, 40 KB, variable weight 400–700, latin) and preloaded. The two `preconnect` links and the `fonts.googleapis.com` stylesheet are gone.
+- **CSS:** removed ~6 KB of dead rules from `style.css` left over from the pre-raster unit-finder markup; `unit-finder/public/css/unit-finder.css` now loads in `<head>` instead of after the footer.
+- **Deploy:** added `_headers` (one-year immutable caching for `/images/*` and `/fonts/*`) and `.assetsignore` (keeps `AGENTS.md`, `CHANGES.md`, `README.md`, `carousel-images.txt`, `wrangler.jsonc`, and the Affinity/SVG map sources off the published site).
+- **Social preview:** `og:image` is an absolute URL pointing to `images/og-entrance-1200x630.jpg`, and the JSON-LD `url` is filled in.
+- Page weight: home ~850 KB first view / ~3.8 MB scrolled → ~180 KB / ~600 KB. Every other page ~370 KB → ~80 KB.
 
 ### Pest control schedule moved to its own page
 

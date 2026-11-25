@@ -1,0 +1,17 @@
+# Files that are part of the repo but not part of the published website.
+# Cloudflare Workers uses wrangler.jsonc (assets.directory = "./"), so without
+# this file the whole repo is uploaded and publicly reachable.
+
+AGENTS.md
+README.md
+CHANGES.md
+carousel-images.txt
+wrangler.jsonc
+.gitignore
+.assetsignore
+_headers
+
+# Affinity source and SVG export for the property map. The site uses the raster
+# base (images/spa-map-base.webp) plus the overlay shapes in unit-finder.js.
+images/theSpa-LabeledSVG.af
+images/theSpa-LabeledSVG.svg

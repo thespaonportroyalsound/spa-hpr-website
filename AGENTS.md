@@ -28,11 +28,14 @@ To change the site: edit the HTML/CSS in place and verify by opening the relevan
 
 ## Design
 
-Hunter-green palette: deep green `#1B3A28`, green `#244C34`, moss accent `#5B7A4B`, cream `#F1E9D2`, paper `#FBF7EC`. Source Serif 4 font stack (modern serif). Compact top navbar with brand + page links; small masthead on the home page and a slim page header on interior pages — no street address in the header.
+Hunter-green palette: deep green `#1B3A28`, green `#244C34`, moss accent `#5B7A4B`, cream `#F1E9D2`, paper `#FBF7EC`. Source Serif 4 font stack (modern serif), self-hosted from `fonts/source-serif-4-latin-var.woff2` and preloaded — the site makes no third-party requests. Compact top navbar with brand + page links; small masthead on the home page and a slim page header on interior pages — no street address in the header.
 
 ## Output
 
 - `index.html`, `rules.html`, `documents.html`, `unit-finder.html`, `pest-control.html` + `style.css` at root
-- `images/` directory holds the overhead property map: the source `theSpa-LabeledSVG.af` (Affinity), its SVG export `theSpa-LabeledSVG.svg`, and the raster `spa-map-base.webp` (30KB, 2706×936) that the page actually loads. The unit-finder page overlays a small transparent SVG on top for click targets and highlights.
-- `images/rasters/` for hero, logo, pool/beach photos (real photos staged in `images/rasters/photos/`, see `carousel-images.txt` for the source-URL to filename mapping)
+- `fonts/` — `source-serif-4-latin-var.woff2` (variable weight 400–700, latin subset, ~40 KB) and its OFL license. Loaded with `@font-face` in `style.css` and preloaded in every page head.
+- `images/` — overhead property map: the source `theSpa-LabeledSVG.af` (Affinity), its SVG export `theSpa-LabeledSVG.svg`, and the raster `spa-map-base.webp` (30KB, 2706×936) that the page actually loads. Both source files are excluded from the deploy by `.assetsignore`. The unit-finder page overlays a small transparent SVG on top for click targets and highlights. Also holds the masthead photo `hero-entrance-1152.webp`, `rasters/site-logo-260.webp`, `favicon-48.png`, `apple-touch-icon-180.png`, and the social-preview crop `og-entrance-1200x630.jpg`.
+- `images/rasters/photos/` — the property photos actually used, each in two sizes: `-800.webp` (800×534) and `-400.webp` (400×267), served through `srcset`/`sizes`. They are cropped to the 3:2 box the pages display. The 1920px originals of all 24 carousel photos are in git history (`git log -- images/rasters/photos`); see `carousel-images.txt` for the source-URL mapping.
+- `_headers` — Cloudflare Workers cache policy: one-year immutable caching for `/images/*` and `/fonts/*`. Image filenames carry their size, so replacing a photo means adding a new filename, not overwriting one.
+- `.assetsignore` — keeps repo-only files (docs, `wrangler.jsonc`, map sources) off the published site, because `wrangler.jsonc` publishes the whole repo root as assets.
 - Deploy to any static host — no server runtime needed

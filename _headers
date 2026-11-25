@@ -1,0 +1,17 @@
+# Cache policy for Cloudflare Workers static assets.
+# Default is "public, max-age=0, must-revalidate" for every file, which makes
+# repeat visitors revalidate each asset. Images and fonts never change under an
+# existing name (photo variants carry their size, e.g. -800.webp), so they can be
+# cached for a year. If you replace one, give it a new filename.
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML and CSS keep the default revalidation so edits go live immediately.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

@@ -15,7 +15,7 @@ To change the site: edit the HTML/CSS in place and verify by opening the relevan
   - `index.html` — Home: welcome intro + key rules at a glance (pet policy, parking cost, quiet hours, pool hours, prohibited vehicles, trash/walkways).
   - `rules.html` — Full rules & regulations (warnings, parking, quiet hours, pools, trash, walkways, service animals).
   - `unit-finder.html` — Interactive unit & building finder. Enter a unit number to see which of the nine buildings (A–I) it is in and where it sits within that building, paired with an overhead property map. Unit-to-building data, floor-1 unit layouts, and stairwell positions live in `unit-finder/unit-finder.js` and can be edited in place. Page-specific styles are in `unit-finder/public/css/unit-finder.css`.
-  - `pest-control.html` — Orkin pest control schedule: visit dates for the second Wednesday and fourth Thursday of each month, with the buildings covered on each visit (A–I). The table's dates roll forward automatically every year via the inline script.
+  - `pest-control.html` — Orkin pest control schedule: the standing visit days (the second Wednesday and fourth Thursday of each month) and, for each month, which buildings (A–I) are covered on each of those two visits. Static table, no JavaScript.
   - `documents.html` — Governing document links + contacts for both managers.
 - **Public information only.** Do not add private resident-only content.
 
